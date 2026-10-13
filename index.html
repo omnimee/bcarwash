@@ -237,7 +237,7 @@ async function boot(){
     let tick=0;
     setInterval(()=>{if(document.hidden)return;tick++;
       if(S.tok)syncNow();
-      else if(S.screen==='public'&&S.pub==='home'&&tick%2===0)loadPublic()},7000);
+      else if(S.screen==='public'&&S.pub==='home'&&tick%2===0)loadPublic()},15000);
   }else{
     try{S.sess=localStorage.getItem('bcw_sess')||null}catch(e){}
     localLoad();
