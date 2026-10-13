@@ -1,0 +1,1028 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BCar Wash & Detailing</title>
+<meta name="theme-color" content="#0a1a4f">
+<meta name="description" content="Booking, antrian, dan manajemen BCar Wash & Detailing">
+<style>
+:root{--bg:#f1f4fb;--card:#fff;--tx:#0f1b3d;--mut:#5b6785;--bd:#dce2f0;--pri:#1e5bd8;--navy:#0a1a4f;--ok:#118a4a;--warn:#b7791f;--bad:#c0392b;--soft:#eaf0ff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1020;--card:#141b33;--tx:#eef2ff;--mut:#9aa6c7;--bd:#263056;--soft:#1b2750}}
+:root[data-theme="dark"]{--bg:#0b1020;--card:#141b33;--tx:#eef2ff;--mut:#9aa6c7;--bd:#263056;--soft:#1b2750}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-bottom:84px}
+.wrap{max-width:720px;margin:0 auto;padding:12px}
+.hero{background:linear-gradient(135deg,var(--navy),var(--pri));color:#fff;border-radius:18px;padding:18px;display:flex;gap:14px;align-items:center}
+.hero h1{margin:0;font-size:22px;line-height:1.15}
+.hero p{margin:4px 0 0;opacity:.9}
+.logo{width:64px;height:64px;border-radius:16px;background:#fff;display:grid;place-items:center;overflow:hidden;flex:none;color:var(--pri);font-weight:900;font-size:32px}
+.logo.sm{width:38px;height:38px;border-radius:10px;font-size:20px}
+.logo img{width:100%;height:100%;object-fit:contain}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;margin-top:12px}
+.card h2{margin:0 0 10px;font-size:16px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.sp{justify-content:space-between}
+.mut{color:var(--mut);font-size:13px}
+label{display:block;font-size:13px;color:var(--mut);margin:10px 0 4px}
+input,select,textarea{width:100%;padding:11px 12px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);font:inherit}
+input[type=checkbox]{width:auto}
+input[type=file]{display:none}
+textarea{min-height:64px}
+button,.btn{border:0;border-radius:10px;padding:11px 14px;font:inherit;font-weight:600;background:var(--pri);color:#fff;cursor:pointer;text-decoration:none;display:inline-block;text-align:center}
+button.ghost,.btn.ghost{background:var(--soft);color:var(--pri)}
+button.bad{background:var(--bad)}button.ok{background:var(--ok)}
+button.sm{padding:7px 10px;font-size:13px}
+button.block{width:100%;margin-top:14px}
+.price{font-weight:700;white-space:nowrap}
+.li{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px dashed var(--bd)}
+.li:last-child{border:0}
+.note{border-radius:10px;padding:8px 10px;margin-top:8px;font-size:13px}.n-ok{background:#dcf5e6;color:#0f7a41}.n-warn{background:#fff3d6;color:#8a5a00}.n-info{background:var(--soft);color:var(--mut)}
+.badge{display:inline-block;padding:2px 9px;border-radius:99px;font-size:12px;font-weight:700;background:var(--soft);color:var(--pri)}
+.b-baru{background:#fff3d6;color:#8a5a00}.rcpt{background:#fff;color:#000;border:1px dashed #bbb;border-radius:8px;padding:12px;margin:10px auto 0;font:12px/1.5 ui-monospace,Menlo,Consolas,monospace;max-width:300px}
+.rcpt .c{text-align:center}.rcpt hr{border:0;border-top:1px dashed #000;margin:8px 0}.rcpt .r{display:flex;justify-content:space-between;gap:8px}.rcpt .t{font-weight:700;font-size:14px}.rcpt img{max-height:44px;max-width:120px;filter:grayscale(1)}
+.rpt{background:#fff;color:#000;border-radius:8px;padding:14px;margin-top:10px;font:13px/1.5 system-ui,sans-serif}
+.rpt h3{margin:14px 0 4px;font-size:14px}.rpt table{font-size:13px}.rpt td,.rpt th{color:#000;border-bottom:1px solid #ddd;padding:4px 2px}.rpt .tot td{font-weight:700;border-top:2px solid #000}
+.fbars{display:flex;gap:3px;align-items:flex-end;height:100px;margin-top:8px}.fbars .d{flex:1;display:flex;gap:1px;align-items:flex-end;height:100%}.fbars i{flex:1;display:block;border-radius:3px 3px 0 0;min-height:2px}
+@media print{body{background:#fff;padding:0}#app,#toast{display:none!important}#sheet{position:static!important;display:block!important;background:none!important}#sheet .in{max-height:none!important;overflow:visible!important;padding:0!important;border-radius:0!important;background:#fff!important;color:#000!important}.noprint{display:none!important}.rcpt{border:0;max-width:72mm}@page{margin:4mm}}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:12px 0 4px}.chips button{flex:none}
+.b-antri{background:#fff3d6;color:#8a5a00}.b-konfirmasi{background:#dff0ff;color:#0b5cad}.b-proses{background:#e9e1ff;color:#5b34c9}.b-selesai{background:#dcf5e6;color:#0f7a41}.b-batal{background:#fde2df;color:#b3261e}
+.nav{overflow-x:auto;position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--bd);display:flex;padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px));z-index:5}
+.nav button{flex:1 0 62px;background:none;color:var(--mut);font-size:11px;padding:6px 2px;font-weight:600}
+.nav button span{display:block;font-size:20px}
+.nav button.on{color:var(--pri)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{background:var(--soft);border-radius:12px;padding:12px}
+.stat b{display:block;font-size:20px}
+.bars{display:flex;gap:6px;align-items:flex-end;height:90px;margin-top:8px}
+.bars div{flex:1;background:var(--pri);border-radius:6px 6px 0 0;min-height:3px;opacity:.85}
+.bars small{display:block;text-align:center;font-size:10px;color:var(--mut);margin-top:3px}
+#sheet{position:fixed;inset:0;background:rgba(5,10,30,.55);z-index:20;display:none;align-items:flex-end;justify-content:center}
+#sheet.on{display:flex}
+#sheet .in{background:var(--card);width:100%;max-width:720px;max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;padding:16px 16px calc(20px + env(safe-area-inset-bottom,0px))}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:96px;background:#111a;backdrop-filter:blur(6px);color:#fff;padding:10px 16px;border-radius:99px;z-index:30;display:none;max-width:90%;font-size:14px;background:#0f1b3dee}
+.photos{display:flex;gap:8px;flex-wrap:wrap}
+.photos img{width:92px;height:92px;object-fit:cover;border-radius:10px;border:1px solid var(--bd)}
+.photos .add{width:92px;height:92px;border:2px dashed var(--bd);border-radius:10px;display:grid;place-items:center;color:var(--mut);font-size:12px;text-align:center;cursor:pointer}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px}
+.ba img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px}
+.ba i{font-size:11px;color:var(--mut);font-style:normal;display:block;text-align:center}
+.tag{font-size:12px;color:var(--mut)}
+.demo{background:#fff3d6;color:#6b4700;padding:8px 12px;border-radius:10px;font-size:13px;margin-bottom:8px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:8px 4px;text-align:left;border-bottom:1px solid var(--bd)}
+th{font-size:12px;color:var(--mut)}
+td.r,th.r{text-align:right}
+.scroll{overflow-x:auto}
+.srow{border:1px solid var(--bd);border-radius:12px;padding:10px;margin-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<div id="sheet"><div class="in" id="sheetIn"></div></div>
+<div id="toast"></div>
+
+<script>
+/* ========== PENGATURAN ==========
+   Tempel URL Web App Apps Script (hasil Deploy, berakhiran /exec) di bawah ini.
+   Dikosongkan = mode demo (data hanya di browser ini). */
+const API_URL='';
+const MODE=API_URL?'api':'local';
+
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const rp=n=>'Rp '+Math.round(n||0).toLocaleString('id-ID');
+const uid=()=>Math.random().toString(36).slice(2,8)+Date.now().toString(36).slice(-4);
+const pad=n=>String(n).padStart(2,'0');
+const ymd=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const today=()=>ymd(new Date());
+const addDays=(s,n)=>{const d=new Date(s+'T00:00:00');d.setDate(d.getDate()+n);return ymd(d)};
+const normPlate=v=>String(v==null?'':v).toUpperCase().replace(/[^A-Z0-9]/g,'');
+const clone=o=>JSON.parse(JSON.stringify(o));
+const fdate=s=>{if(!s)return'-';const d=new Date(s+'T00:00:00');return d.toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'})};
+function toast(m){const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>t.style.display='none',3200)}
+
+/* ---------- defaults (dari banner BCar Wash) ---------- */
+const DEF={
+ brand:{name:'BCar Wash & Detailing',tagline:'Mobil bersih, pikiran jernih',logo:'',color:'#1e5bd8'},
+ contact:{address:'Jl. Raya Bringkang No.109, Bringkang, Menganti, Gresik',phones:'0821 4206 6683 | 0822 3420 0081',hours:'07.00 - 20.00 WIB',wa:'6282142066683'},
+ commissionRate:30,
+ priceView:'tabs',
+ loyalty:{on:true,every:10,type:'free',text:'Cuci gratis 1x',pct:0,maxPrice:55000},
+ comeback:{on:true,type:'discount',text:'Diskon 20% untuk kunjungan berikutnya',pct:20,maxPrice:0},inactiveDays:30,
+ services:[
+  {id:'s1',name:'Cuci Motor Kecil',type:'motor',price:15000,duration:15,cat:'Motor',rate:'',desc:''},
+  {id:'s2',name:'Cuci Motor Besar',type:'motor',price:20000,duration:20,cat:'Motor',rate:'',desc:''},
+  {id:'s3',name:'Standart Car Wash',type:'mobil',price:50000,duration:45,cat:'Cuci Mobil',rate:'',desc:'Harga 50-55K sesuai ukuran mobil'},
+  {id:'s4',name:'Cuci & Wax Premium',type:'mobil',price:150000,duration:90,cat:'Cuci Mobil',rate:'',desc:'Cuci body & vacuum, wax premium, interior dressing, glass coat, fogging anti bakteri'},
+  {id:'s5',name:'Cuci Kolong',type:'mobil',price:80000,duration:60,cat:'Cuci Mobil',rate:'',desc:''},
+  {id:'s6',name:'Engine Cleaning',type:'mobil',price:250000,duration:60,cat:'Detailing',rate:'',desc:''},
+  {id:'s7',name:'Cuci & Detailing Express',type:'mobil',price:350000,duration:120,cat:'Detailing',rate:'',desc:''},
+  {id:'s8',name:'Promo Cuci Premium',type:'mobil',price:350000,duration:180,cat:'Cuci Mobil',rate:'',desc:'Body & vacuum, mesin detailing, kolong, wax, interior dressing, glass coat, engsel pintu, noda aspal, fogging. Garansi hujan cuci body 2x24 jam'},
+  {id:'s9',name:'Interior Detailing',type:'mobil',price:650000,duration:240,cat:'Detailing',rate:'',desc:'Doortrim, plafon, jok, karpet, engsel pintu, cabin fogging & disinfectant'},
+  {id:'s10',name:'Coating Headlamp',type:'mobil',price:400000,duration:90,cat:'Detailing',rate:'',desc:''}
+ ],
+ packages:[
+  {id:'p1',name:'Member Motor Kecil 4x',serviceId:'s1',visits:4,bonus:0,price:50000,days:30},
+  {id:'p2',name:'Member Car Wash 4x',serviceId:'s3',visits:4,bonus:0,price:180000,days:30},
+  {id:'p3',name:'Member Wax Premium 2x',serviceId:'s4',visits:2,bonus:0,price:270000,days:60},
+  {id:'p4',name:'Promo Cuci 10x Gratis 1x (Car Wash)',serviceId:'s3',visits:10,bonus:1,price:500000,days:180},
+  {id:'p5',name:'Promo Cuci Motor 10x Gratis 1x',serviceId:'s1',visits:10,bonus:1,price:150000,days:180}
+ ],
+ staff:[
+  {id:'u0',name:'Owner',username:'admin',pin:'1234',role:'admin',active:true},
+  {id:'u1',name:'Andi',username:'andi',pin:'1111',role:'staff',active:true},
+  {id:'u2',name:'Budi',username:'budi',pin:'1111',role:'staff',active:true},
+  {id:'u3',name:'Candra',username:'candra',pin:'1111',role:'staff',active:true},
+  {id:'u4',name:'Dedi',username:'dedi',pin:'1111',role:'staff',active:true},
+  {id:'u5',name:'Eko',username:'eko',pin:'1111',role:'staff',active:true}
+ ]
+};
+
+/* ---------- state ---------- */
+const S={cfg:clone(DEF),bookings:[],jobs:[],members:[],expenses:[],sess:null,screen:'public',pub:'home',memView:'list',finRange:'month',finFrom:'',finTo:'',priceTab:'',priceOpen:'',custF:'all',custQ:'',tab:'dash',draft:null,sheet:null,month:today().slice(0,7),vehicle:'mobil',done:null,lastBooking:null};
+let db=null;
+const svc=id=>S.cfg.services.find(x=>x.id===id)||{name:'(dihapus)',price:0,type:'mobil'};
+const fdur=m=>{m=+m;if(!m)return'';const h=Math.floor(m/60),r=m%60;return h?(h+' jam'+(r?' '+r+' mnt':'')):(m+' menit')};
+const stf=id=>S.cfg.staff.find(x=>x.id===id);
+const me=()=>stf(S.sess);
+const isAdmin=()=>me()&&me().role==='admin';
+const jst=j=>j.staffIds&&j.staffIds.length?j.staffIds:(j.staffId?[j.staffId]:[]);
+const paidFor=(j,id)=>j.paid||(j.paidBy||[]).includes(id);
+
+/* ---------- storage ---------- */
+function localLoad(){try{const x=JSON.parse(localStorage.getItem('bcw')||'null');if(x){Object.assign(S.cfg,x.cfg||{});S.bookings=x.bookings||[];S.jobs=x.jobs||[];S.members=x.members||[];S.expenses=x.expenses||[]}}catch(e){}}
+function localSave(){try{localStorage.setItem('bcw',JSON.stringify({cfg:S.cfg,bookings:S.bookings,jobs:S.jobs,members:S.members,expenses:S.expenses}))}catch(e){}}
+/* ---------- koneksi Apps Script ---------- */
+async function api(action,payload){
+  const r=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(Object.assign({action,token:S.tok||''},payload||{}))});
+  let j;try{j=await r.json()}catch(e){throw new Error('Server tidak merespons')}
+  if(!j.ok){const e=new Error(j.error||'Terjadi kesalahan');e.code=j.code||'';if(e.code==='auth')authLost();throw e}
+  return j;
+}
+function authLost(){
+  if(!S.tok)return;
+  S.tok='';S.sess=null;try{localStorage.removeItem('bcw_tok')}catch(e){}
+  S.jobs=[];S.bookings=[];S.members=[];S.expenses=[];S.draft=null;S.sheet=null;S.screen='login';
+  toast('Sesi berakhir, silakan login lagi');render();
+}
+const upsertLocal=(col,obj)=>{const i=S[col].findIndex(x=>x.id===obj.id);if(i>=0)S[col][i]=obj;else S[col].unshift(obj)};
+function normCfg(c){
+  S.cfg=Object.assign(clone(DEF),clone(c));
+  S.cfg.services.forEach(x=>{const o=DEF.services.find(y=>y.id===x.id);
+    if(x.duration==null)x.duration=o?o.duration:0;
+    if(!x.cat)x.cat=o?o.cat:(x.type==='motor'?'Motor':'Cuci Mobil')});
+}
+async function put(col,obj){
+  if(MODE==='api'){
+    try{
+      if(!S.tok&&col==='bookings'){const r=await api('createBooking',{booking:obj});Object.assign(obj,r.booking);upsertLocal(col,obj);return true}
+      await api('set',{col,id:obj.id,data:clone(obj)});
+    }catch(e){toast(e.message||'Gagal menyimpan');return false}
+  }
+  upsertLocal(col,obj);if(MODE==='local')localSave();return true;
+}
+async function putMany(col,arr){
+  if(MODE==='api'){try{for(let i=0;i<arr.length;i+=20)await api('batch',{ops:arr.slice(i,i+20).map(o=>({op:'set',col,id:o.id,data:o}))})}catch(e){toast(e.message||'Gagal menyimpan');return false}}
+  arr.forEach(o=>upsertLocal(col,o));if(MODE==='local')localSave();return true;
+}
+async function delMany(col,ids){
+  if(!ids.length)return true;
+  if(MODE==='api'){try{for(let i=0;i<ids.length;i+=20)await api('batch',{ops:ids.slice(i,i+20).map(id=>({op:'remove',col,id}))})}catch(e){toast(e.message||'Gagal menghapus');return false}}
+  S[col]=S[col].filter(x=>!ids.includes(x.id));if(MODE==='local')localSave();return true;
+}
+const del=(col,id)=>delMany(col,[id]);
+async function saveCfg(){
+  if(MODE==='api'){try{await api('setConfig',{cfg:clone(S.cfg)})}catch(e){toast(e.message||'Gagal menyimpan');return false}}
+  else localSave();
+  return true;
+}
+async function saveImg(dataUrl){
+  if(MODE==='api'&&S.tok){const r=await api('upload',{dataUrl});return r.url}
+  return dataUrl;
+}
+let lastSync=0,syncing=false;
+function applyDocs(docs){
+  const cr=docs.config||[];
+  if(cr.length){const c=cr[cr.length-1];if(!c.d&&c.data)normCfg(c.data)}
+  ['bookings','jobs','members','expenses'].forEach(col=>{
+    (docs[col]||[]).forEach(r=>{if(r.d)S[col]=S[col].filter(x=>x.id!==r.id);else upsertLocal(col,Object.assign({},r.data,{id:r.id}))});
+    S[col].sort((a,b)=>(b.createdAt||'').localeCompare(a.createdAt||''));
+  });
+}
+async function syncNow(full){
+  if(syncing||MODE!=='api'||!S.tok)return;
+  syncing=true;
+  try{
+    if(full){S.bookings=[];S.jobs=[];S.members=[];S.expenses=[];lastSync=0}
+    const r=await api('sync',{since:lastSync});
+    if(!r.unchanged){applyDocs(r.docs);soft()}
+    lastSync=r.now;
+  }catch(e){}finally{syncing=false}
+}
+async function loadPublic(){
+  try{const r=await api('publicState');normCfg(r.cfg);S.bookings=r.bookings;S.jobs=r.jobs;S.members=[];S.expenses=[];soft()}catch(e){}
+}
+async function boot(){
+  if(MODE==='api'){
+    try{S.tok=localStorage.getItem('bcw_tok')||''}catch(e){}
+    await loadPublic();
+    if(S.tok){
+      try{const r=await api('me');S.sess=r.user.id;await syncNow(true);S.screen='app';S.tab=r.user.role==='admin'?'dash':'book'}
+      catch(e){S.tok='';S.sess=null;try{localStorage.removeItem('bcw_tok')}catch(_){}}
+    }
+    let tick=0;
+    setInterval(()=>{if(document.hidden)return;tick++;
+      if(S.tok)syncNow();
+      else if(S.screen==='public'&&S.pub==='home'&&tick%2===0)loadPublic()},7000);
+  }else{
+    try{S.sess=localStorage.getItem('bcw_sess')||null}catch(e){}
+    localLoad();
+    if(S.sess&&me()&&me().active)S.screen='app';else S.sess=null;
+  }
+  render();
+}
+function soft(){const a=document.activeElement;if(a&&/INPUT|TEXTAREA|SELECT/.test(a.tagName)&&a.closest('#app'))return;if(S.sheet||S.draft&&S.screen==='app')return;render()}
+
+/* ---------- images ---------- */
+function shrink(file,max,q,type){return new Promise((res,rej)=>{const im=new Image(),u=URL.createObjectURL(file);im.onload=()=>{const r=Math.min(1,max/Math.max(im.width,im.height));const c=document.createElement('canvas');c.width=Math.round(im.width*r);c.height=Math.round(im.height*r);c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);res(c.toDataURL(type||'image/jpeg',q))};im.onerror=rej;im.src=u})}
+
+/* ---------- render ---------- */
+function theme(){document.documentElement.style.setProperty('--pri',S.cfg.brand.color||'#1e5bd8')}
+function logo(sm){const b=S.cfg.brand;return `<div class="logo${sm?' sm':''}">${b.logo?`<img src="${esc(b.logo)}" alt="">`:esc((b.name||'B').trim()[0]||'B')}</div>`}
+function render(){theme();const a=$('#app');
+  if(S.screen==='login')a.innerHTML=vLogin();
+  else if(S.screen==='app'&&me())a.innerHTML=vApp();
+  else{S.screen='public';a.innerHTML=vPublic()}
+  document.title=S.cfg.brand.name;
+  if(S.sheet)renderSheet();
+}
+const demoBar=()=>MODE==='api'?'':'<div class="demo">Mode demo: data hanya tersimpan di browser ini.</div>';
+
+/* ----- antrian & ketersediaan karyawan ----- */
+const dupActive=d=>{const pl=normPlate(d.plate);return pl?S.jobs.find(j=>j.id!==d.id&&(j.status==='antri'||j.status==='proses')&&normPlate(j.plate)===pl):null};
+const hm=v=>{const d=v?new Date(v):new Date();return pad(d.getHours())+':'+pad(d.getMinutes())};
+const dmin=id=>(+svc(id).duration)||30;
+const workers=()=>S.cfg.staff.filter(u=>u.active&&u.role==='staff');
+const endOf=j=>new Date(j.startedAt||j.createdAt||Date.now()).getTime()+dmin(j.serviceId)*60000;
+function busyIds(exceptId){const b=new Set();S.jobs.forEach(j=>{if(j.status==='proses'&&j.id!==exceptId)jst(j).forEach(i=>b.add(i))});return b}
+function defStaff(){if(me()&&me().role==='staff')return [me().id];const b=busyIds();const w=workers().find(u=>!b.has(u.id));return w?[w.id]:[]}
+function queueInfo(){
+  const now=Date.now(),W=workers(),idx={},frees=W.map(()=>now);W.forEach((u,i)=>idx[u.id]=i);
+  const working=S.jobs.filter(j=>j.status==='proses');
+  working.forEach(j=>{const e=endOf(j);jst(j).forEach(id=>{if(idx[id]!=null)frees[idx[id]]=Math.max(frees[idx[id]],e)})});
+  const busy=busyIds(),avail=W.filter(u=>!busy.has(u.id)).length;
+  const items=[];
+  S.jobs.filter(j=>j.status==='antri').forEach(j=>items.push({k:hm(j.createdAt),plate:j.plate,serviceId:j.serviceId}));
+  S.bookings.filter(b=>b.date===today()&&(b.status==='baru'||b.status==='konfirmasi')).forEach(b=>items.push({k:b.time,plate:b.plate,serviceId:b.serviceId,at:new Date(b.date+'T'+b.time+':00').getTime()}));
+  items.sort((a,b)=>a.k.localeCompare(b.k));
+  const f=frees.length?frees.slice():[now];
+  items.forEach(x=>{let m=0;f.forEach((v,i)=>{if(v<f[m])m=i});x.start=Math.max(f[m],now,x.at||0);f[m]=x.start+dmin(x.serviceId)*60000});
+  return {total:W.length,avail,items,working,now};
+}
+
+/* ----- public page ----- */
+function maskPlate(p){p=String(p||'').replace(/\s+/g,'');return p.length<=3?p:p[0]+'•••'+p.slice(-2)}
+function vPublic(){
+  const c=S.cfg,k=c.contact;
+  const hero=demoBar()+`<div class="hero">${logo()}<div><h1>${esc(c.brand.name)}</h1><p>${esc(c.brand.tagline)}</p></div></div>`;
+  if(S.pub==='book')return hero+`<button class="ghost" style="margin-top:12px" data-a="pub" data-v="home">← Kembali</button>`+vBook();
+  if(S.pub==='price')return hero+`<button class="ghost" style="margin-top:12px" data-a="pub" data-v="home">← Kembali</button>`+vPrice();
+  const Q=queueInfo(),ok=Q.avail>0;
+  const hint=!Q.total?'':ok?(Q.items.length?'Ada karyawan yang kosong, antrian segera dilayani.':'Ada karyawan yang kosong, silakan langsung datang.'):'Semua karyawan sedang bekerja. Antrian dilayani setelah ada karyawan yang selesai.';
+  return hero+`<div class="card"><div class="row sp"><div><b data-a="goLogin" style="cursor:default;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent">Lokasi</b><div class="mut">${esc(k.address)}</div><div class="mut">Buka: ${esc(k.hours)}</div><div class="mut">${esc(k.phones)}</div></div></div></div>
+  <div class="grid2" style="margin-top:12px"><button data-a="pub" data-v="book">📅 Booking Online</button><button class="ghost" data-a="pub" data-v="price">💰 Daftar Harga</button></div>
+  <div class="card"><div class="row sp"><h2 style="margin:0">Antrian Hari Ini</h2><span class="badge ${ok?'b-selesai':'b-batal'}">Karyawan tersedia ${Q.avail}/${Q.total}</span></div>
+  <div class="mut" style="margin-top:6px">${hint}</div>
+  ${Q.working.length?`<div class="tag" style="margin-top:10px"><b>Sedang dikerjakan (${Q.working.length})</b></div>`+Q.working.map(j=>`<div class="li"><div><b>${esc(maskPlate(j.plate))}</b><div class="tag">${esc(svc(j.serviceId).name)}</div></div><div style="text-align:right"><span class="badge b-proses">Dikerjakan</span><div class="tag">est. selesai ${hm(endOf(j))}</div></div></div>`).join(''):''}
+  <div class="tag" style="margin-top:10px"><b>Antrian (${Q.items.length})</b></div>
+  ${Q.items.map((x,i)=>`<div class="li"><div><b>${i+1}. ${esc(maskPlate(x.plate))}</b><div class="tag">${esc(svc(x.serviceId).name)}</div></div><div style="text-align:right"><span class="badge b-antri">Menunggu</span><div class="tag">${x.start<=Q.now+60000?'Segera dilayani':'est. mulai ±'+hm(x.start)}</div></div></div>`).join('')||'<div class="mut">Tidak ada antrian.</div>'}</div>`;
+}
+function vBook(){
+  const c=S.cfg,k=c.contact,list=c.services.filter(s=>s.type===S.vehicle);
+  const times=[];for(let h=7;h<20;h++){times.push(pad(h)+':00');times.push(pad(h)+':30')}
+  if(S.lastBooking){const b=S.lastBooking;
+    return `<div class="card"><h2>Booking terkirim ✅</h2><p>Kode booking: <b>${esc(b.code)}</b><br>${esc(svc(b.serviceId).name)} · ${fdate(b.date)} pukul ${esc(b.time)}</p>
+    <a class="btn ok block" target="_blank" href="https://wa.me/${esc(k.wa)}?text=${encodeURIComponent('Halo, saya booking '+b.code+' ('+svc(b.serviceId).name+', '+fdate(b.date)+' '+b.time+') a.n. '+b.name)}">Konfirmasi via WhatsApp</a>
+    <button class="ghost block" data-a="newBooking">Booking lagi</button></div>`;}
+  return `<div class="card"><h2>Booking Online</h2><form id="bkForm">
+  <label>Jenis kendaraan</label><div class="grid2"><button type="button" class="${S.vehicle==='mobil'?'':'ghost'}" data-a="veh" data-v="mobil">🚗 Mobil</button><button type="button" class="${S.vehicle==='motor'?'':'ghost'}" data-a="veh" data-v="motor">🛵 Motor</button></div>
+  <label>Layanan</label><select name="serviceId" required>${list.map(s=>`<option value="${s.id}">${esc(s.name)} — ${rp(s.price)}${s.duration?' · '+fdur(s.duration):''}</option>`).join('')}</select>
+  <label>Nama</label><input name="name" required autocomplete="name">
+  <label>No. WhatsApp</label><input name="phone" required inputmode="tel" autocomplete="tel">
+  <label>Plat nomor (huruf kapital, tanpa spasi)</label><input name="plate" required data-plate="1" autocapitalize="characters" placeholder="L1234AB" style="text-transform:uppercase"><div id="bkNote"></div>
+  <div class="grid2"><div><label>Tanggal</label><input type="date" name="date" min="${today()}" value="${slotsLeft(today())?today():addDays(today(),1)}" required></div>
+  <div><label>Jam</label><select name="time" id="bkTime">${timeOptions(slotsLeft(today())?today():addDays(today(),1))}</select></div></div>
+  <div class="tag" id="bkTimeNote" style="color:var(--bad)">${slotsLeft(today())?'':'Jam operasional hari ini sudah berakhir, tanggal otomatis diganti besok.'}</div>
+  <label>Catatan (opsional)</label><textarea name="note"></textarea>
+  <button class="block" type="submit">Kirim Booking</button></form></div>`;
+}
+function vPrice(){
+  const c=S.cfg;if(c.priceView==='list')return vPriceList();
+  const cats=[...new Set(c.services.map(s=>s.cat||'Lainnya'))],tabs=cats.concat(c.packages.length?['Paket Member']:[]);
+  const cur=tabs.includes(S.priceTab)?S.priceTab:tabs[0];
+  const row=(id,name,pr,det)=>`<div class="li" style="cursor:pointer" data-a="priceOpen" data-id="${esc(id)}"><div><b>${esc(name)}</b> <span class="tag">${S.priceOpen===id?'▴':'▾'}</span>${S.priceOpen===id?`<div class="tag" style="margin-top:4px">${det}</div>`:''}</div><div class="price">${pr}</div></div>`;
+  const body=cur==='Paket Member'?c.packages.map(p=>row('pk_'+p.id,(p.bonus?'🎁 ':'')+p.name,rp(p.price),p.visits+'x cuci'+(p.bonus?' + <b>GRATIS '+p.bonus+'x</b>':'')+' · berlaku '+p.days+' hari')).join(''):
+    c.services.filter(s=>(s.cat||'Lainnya')===cur).map(s=>row(s.id,s.name,rp(s.price),(s.duration?'⏱ '+fdur(s.duration):'')+(s.duration&&s.desc?' · ':'')+esc(s.desc||'')||'Tanpa keterangan')).join('');
+  return `<div class="chips">${tabs.map(t=>`<button class="${t===cur?'':'ghost'}" data-a="priceTab" data-v="${esc(t)}">${esc(t)}</button>`).join('')}</div>
+  <div class="card" style="margin-top:6px">${body||'<div class="mut">Belum ada item.</div>'}<div class="tag" style="margin-top:6px">Ketuk item untuk melihat detail.</div></div>
+  <button class="block" data-a="pub" data-v="book">📅 Booking Sekarang</button>`;
+}
+function vPriceList(){
+  const c=S.cfg;
+  return `<div class="card"><h2>Daftar Harga</h2>${c.services.map(s=>`<div class="li"><div>${esc(s.name)}<div class="tag">${s.duration?'⏱ '+fdur(s.duration)+(s.desc?' · ':''):''}${esc(s.desc)}</div></div><div class="price">${rp(s.price)}</div></div>`).join('')}</div>
+  <div class="card"><h2>Paket Langganan</h2>${c.packages.map(p=>`<div class="li"><div>${p.bonus?'<span class="badge b-selesai">PROMO</span> ':''}${esc(p.name)}<div class="tag">${p.visits}x cuci${p.bonus?' + <b>GRATIS '+p.bonus+'x</b>':''} · berlaku ${p.days} hari</div></div><div class="price">${rp(p.price)}</div></div>`).join('')}<p class="mut">Tanyakan ke kasir untuk daftar member.</p></div>
+  <button class="block" data-a="pub" data-v="book">📅 Booking Sekarang</button>`;
+}
+
+/* ----- login ----- */
+function vLogin(){return `<div class="hero">${logo()}<div><h1>Login Staff</h1><p>${esc(S.cfg.brand.name)}</p></div></div>
+ <div class="card"><form id="loginForm"><label>Username</label><input name="u" autocapitalize="none" autocomplete="username" required>
+ <label>PIN</label><input name="p" type="password" inputmode="numeric" autocomplete="current-password" required>
+ <button class="block" type="submit">Masuk</button></form>
+ <button class="ghost block" data-a="goPublic">← Kembali</button></div>`}
+
+/* ----- app shell ----- */
+function tabs(){const t=[['dash','🏠','Beranda'],['book','📅','Booking'],['jobs','🧽','Kerja'],['mem','🎫','Member'],['cust','👤','Pelanggan'],['kom','💰','Komisi']];if(isAdmin()){t.push(['fin','📊','Keuangan']);t.push(['svc','🧼','Layanan']);t.push(['stf','👥','Karyawan']);t.push(['set','⚙️','Setelan'])}return isAdmin()?t:t.filter(x=>x[0]!=='dash'&&x[0]!=='mem'||x[0]==='mem')}
+function vApp(){
+  if(!isAdmin()&&S.tab==='dash')S.tab='book';
+  const t=tabs().filter(x=>isAdmin()||x[0]!=='dash');
+  let body='';
+  if(S.tab==='dash')body=tDash();else if(S.tab==='book')body=tBook();else if(S.tab==='jobs')body=tJobs();else if(S.tab==='mem')body=tMem();else if(S.tab==='cust')body=tCust();else if(S.tab==='kom')body=tKom();else if(S.tab==='fin'&&isAdmin())body=tFin();else if(S.tab==='svc'&&isAdmin())body=tSvc();else if(S.tab==='stf'&&isAdmin())body=tStf();else if(S.tab==='set'&&isAdmin())body=tSet();else body=tBook();
+  return demoBar()+`<div class="row sp" style="margin-bottom:4px"><div class="row">${logo(1)}<div><b>${esc(S.cfg.brand.name)}</b><div class="mut">${esc(me().name)} · ${me().role==='admin'?'Admin':'Karyawan'}</div></div></div><button class="ghost sm" data-a="logout">Keluar</button></div>${body}
+  <div class="nav">${t.map(x=>`<button class="${S.tab===x[0]?'on':''}" data-a="tab" data-t="${x[0]}"><span>${x[1]}</span>${x[2]}</button>`).join('')}</div>`;
+}
+
+/* ----- dashboard ----- */
+function omzetOn(d){return S.jobs.filter(j=>j.status==='selesai'&&!j.demo&&j.doneDate===d).reduce((a,j)=>a+(+j.price||0),0)+S.members.filter(m=>m.created===d&&!m.demo).reduce((a,m)=>a+(+m.paid||0),0)}
+function tDash(){
+  const Q=queueInfo(),t=today(),days=[];for(let i=6;i>=0;i--)days.push(addDays(t,-i));
+  const vals=days.map(omzetOn),mx=Math.max(1,...vals);
+  const jd=S.jobs.filter(j=>j.status==='selesai'&&j.doneDate===t);
+  return `<div class="grid2" style="margin-top:12px"><div class="stat">Omzet hari ini<b>${rp(omzetOn(t))}</b></div><div class="stat">Cucian selesai<b>${jd.length}</b></div>
+  <div class="stat">Booking baru<b>${S.bookings.filter(b=>b.status==='baru').length}</b></div><div class="stat">Sedang dikerjakan<b>${S.jobs.filter(j=>j.status==='proses').length}</b></div>
+  <div class="stat">Karyawan tersedia<b>${Q.avail}/${Q.total}</b></div><div class="stat">Dalam antrian<b>${Q.items.length}</b></div></div>
+  <div class="card"><h2>Omzet 7 hari</h2><div class="bars">${vals.map(v=>`<div style="height:${Math.round(v/mx*100)}%" title="${rp(v)}"></div>`).join('')}</div>
+  <div class="row" style="gap:6px">${days.map(d=>`<small style="flex:1;text-align:center;font-size:10px;color:var(--mut)">${d.slice(8)}</small>`).join('')}</div></div>
+  <div class="card"><h2>Booking hari ini</h2>${S.bookings.filter(b=>b.date===t&&b.status!=='batal').sort((a,b)=>a.time.localeCompare(b.time)).map(b=>`<div class="li"><div><b>${esc(b.time)}</b> ${esc(b.name)}<div class="tag">${esc(b.plate)} · ${esc(svc(b.serviceId).name)}</div></div><span class="badge b-${b.status}">${b.status}</span></div>`).join('')||'<div class="mut">Belum ada booking.</div>'}</div>`;
+}
+
+/* ----- booking ----- */
+function tBook(){
+  const L=S.bookings;
+  return `<div class="row sp" style="margin-top:12px"><h2 style="margin:0">Booking</h2><button class="sm" data-a="jobNew">+ Walk-in</button></div>`+
+  (L.map(b=>`<div class="card"><div class="row sp"><b>${esc(b.code)} · ${esc(b.name)}</b><span class="badge b-${b.status}">${b.status}</span></div>
+  <div class="mut">${fdate(b.date)} ${esc(b.time)} · ${esc(b.plate)} (${esc(b.vehicle)})</div><div>${esc(svc(b.serviceId).name)} — ${rp(svc(b.serviceId).price)}${svc(b.serviceId).duration?' · ⏱ '+fdur(svc(b.serviceId).duration):''}</div>${b.note?`<div class="tag">Catatan: ${esc(b.note)}</div>`:''}${notesHtml(memberMsgs(b.plate,b.serviceId,false).filter(x=>x.t!=='info'))}${loyTag(b.plate,b.serviceId)}
+  <div class="row" style="margin-top:8px"><a class="btn ghost sm" href="tel:${esc(b.phone)}">📞 ${esc(b.phone)}</a>
+  ${b.status==='baru'?`<button class="sm" data-a="bkSt" data-id="${b.id}" data-s="konfirmasi">Konfirmasi</button>`:''}
+  ${b.status==='baru'||b.status==='konfirmasi'?`<button class="sm ok" data-a="bkJob" data-id="${b.id}">Mulai kerjakan</button><button class="sm bad" data-a="bkSt" data-id="${b.id}" data-s="batal">Batal</button>`:''}
+  ${isAdmin()?`<button class="sm ghost" data-a="bkDel" data-id="${b.id}">Hapus</button>`:''}</div></div>`).join('')||'<div class="card mut">Belum ada booking masuk.</div>');
+}
+
+/* ----- jobs ----- */
+function tJobs(){
+  const L=S.jobs.filter(j=>!j.demo&&(isAdmin()?(!S.jobStaff||jst(j).includes(S.jobStaff)):(jst(j).includes(S.sess)||j.status==='antri')));
+  return `<div class="row sp" style="margin-top:12px"><h2 style="margin:0">Pekerjaan</h2><button class="sm" data-a="jobNew">+ Baru</button></div>${isAdmin()?`<select id="jobFilter" style="margin-top:8px"><option value="">Semua karyawan</option>${S.cfg.staff.filter(u=>u.role==='staff').map(u=>`<option value="${u.id}" ${S.jobStaff===u.id?'selected':''}>${esc(u.name)}</option>`).join('')}</select>`:`<div class="mut" style="margin-top:4px">Pekerjaan atas nama ${esc(me().name)}</div>`}`+
+  (L.map(j=>`<div class="card" data-a="jobOpen" data-id="${j.id}" style="cursor:pointer"><div class="row sp"><b>${esc(j.plate)} · ${esc(j.customer)}</b><span class="badge b-${j.status}">${j.status}</span></div>
+  <div>${esc(svc(j.serviceId).name)}${svc(j.serviceId).duration?' · ⏱ '+fdur(svc(j.serviceId).duration):''} · <span class="price">${payLbl(j)}</span></div>
+  <div class="tag">${j.status==='antri'?'Menunggu karyawan':'Dikerjakan: '+esc(jst(j).map(i=>(stf(i)||{}).name||'?').join(', ')||'-')} · ${fdate(j.createdDate)}${j.status==='selesai'?' · Komisi '+rp(j.commission):''}</div>
+  ${(j.before&&j.before[0]||j.after&&j.after[0])?`<div class="ba"><div>${j.before&&j.before[0]?`<img src="${esc(j.before[0])}"><i>Before</i>`:''}</div><div>${j.after&&j.after[0]?`<img src="${esc(j.after[0])}"><i>After</i>`:''}</div></div>`:''}</div>`).join('')||'<div class="card mut">Belum ada pekerjaan.</div>');
+}
+function activeStaff(){return S.cfg.staff.filter(s=>s.active&&s.role==='staff'||s.active&&s.role==='admin')}
+function sheetJob(){
+  const d=S.sheet.d,c=S.cfg,busy=busyIds(d.id);if(d.status!=='selesai')autoMember(d);
+  const mems=S.members.filter(m=>m.serviceId===d.serviceId&&m.visitsLeft>0&&m.expires>=today()||m.id===d.memberId);
+  const ph=(side)=>`<div class="photos">${(d[side]||[]).map((u,i)=>`<div style="position:relative"><img src="${esc(u)}"><button class="sm bad" style="position:absolute;top:2px;right:2px;padding:1px 7px" data-a="phDel" data-side="${side}" data-i="${i}">×</button></div>`).join('')}
+   ${(d[side]||[]).length<(MODE==='api'?4:2)?`<label class="add" for="f_${side}">+ Foto<br>${side==='before'?'Before':'After'}</label><input type="file" id="f_${side}" accept="image/*" capture="environment" data-ph="${side}">`:''}</div>`;
+  return `<div class="row sp"><h2 style="margin:0">${d._new?'Pekerjaan baru':'Pekerjaan'}</h2><button class="ghost sm" data-a="sheetClose">Tutup</button></div>
+  <label>Nama pelanggan</label><input data-j="customer" value="${esc(d.customer)}">
+  <div class="grid2"><div><label>Plat nomor</label><input data-j="plate" value="${esc(d.plate)}" autocapitalize="characters" placeholder="L1234AB" style="text-transform:uppercase"></div><div><label>No. HP</label><input data-j="phone" value="${esc(d.phone)}" inputmode="tel"></div></div>
+  <label>Layanan</label><select data-j="serviceId" data-re="1">${c.services.map(s=>`<option value="${s.id}" ${s.id===d.serviceId?'selected':''}>${esc(s.name)} (${rp(s.price)})</option>`).join('')}</select>
+  <div id="memBox">${memBoxHtml(d)}</div>
+  <label>Harga dibayar</label><input type="number" id="priceIn" data-j="price" data-n="1" value="${d.price}" ${d.memberId||d.loyaltyFree?'disabled':''}>
+  <label>Metode bayar</label><select data-j="payMethod">${METHODS.map(m=>`<option ${(d.payMethod||'Tunai')===m?'selected':''}>${m}</option>`).join('')}</select>
+  <label>Karyawan yang mengerjakan (boleh lebih dari 1)</label>
+  <div class="srow" style="margin-top:0">${activeStaff().filter(u=>u.role==='staff'||u.id===S.sess).map(u=>{const bz=busy.has(u.id)&&d.status!=='selesai',lock=!isAdmin()&&u.id===S.sess&&!bz,on=!bz&&((d.staffIds||[]).includes(u.id)||lock);return `<label style="display:flex;gap:8px;align-items:center;margin:6px 0;color:var(--tx);font-size:15px"><input type="checkbox" data-sj="${u.id}" ${on?'checked':''} ${lock||bz?'disabled':''}> ${esc(u.name)}${bz?' (sedang bekerja)':lock?' (Anda)':''}</label>`}).join('')}
+  <div class="tag">Komisi dibagi rata ke semua karyawan yang dipilih.</div></div>
+  ${d.status==='antri'?`<div class="mut" style="margin-top:8px">${workers().length&&busy.size>=workers().length?'Semua karyawan sedang bekerja. Simpan ke antrian dulu.':'Pilih karyawan yang tersedia, lalu mulai.'}</div>`:''}
+  <label>Foto Before</label>${ph('before')}<label>Foto After</label>${ph('after')}
+  <div class="row" style="margin-top:16px">${d.status==='selesai'?`<button class="ghost" data-a="jobSave">Simpan</button><button class="ghost" data-a="notaJob" data-id="${d.id}">🧾 Nota</button><span class="badge b-selesai">Selesai · komisi ${rp(d.commission)}</span>`:d.status==='proses'?`<button class="ghost" data-a="jobSave">Simpan</button><button class="ok" data-a="jobDone">Selesai ✔</button>`:`<button class="ok" data-a="jobStart">Mulai kerjakan</button><button class="ghost" data-a="jobQueue">Masuk antrian</button>`}
+  ${isAdmin()&&!d._new?'<button class="bad sm" data-a="jobDel">Hapus</button>':''}</div>`;
+}
+function newJobDraft(b){
+  const first=S.cfg.services.find(s=>s.type===(b?b.vehicle:'mobil'))||S.cfg.services[0];
+  const sid=b?b.serviceId:first.id;
+  return {_new:1,id:uid(),bookingId:b?b.id:'',customer:b?b.name:'',phone:b?b.phone:'',plate:b?normPlate(b.plate):'',vehicle:b?b.vehicle:'mobil',serviceId:sid,price:svc(sid).price,memberId:'',staffIds:defStaff(),staffId:'',status:'antri',payMethod:'Tunai',before:[],after:[],createdDate:today(),createdAt:new Date().toISOString(),commission:0,paid:false};
+}
+
+/* ----- members ----- */
+function pkgDirty(d,i){const pk=d.packages[i],c=S.cfg.packages.find(x=>x.id===pk.id);return !c||JSON.stringify(c)!==JSON.stringify(pk)}
+function pkgBadge(d,i){return pkgDirty(d,i)?`<span id="pkgst${i}" class="badge b-antri">Belum disimpan</span>`:`<span id="pkgst${i}" class="badge b-selesai">Tersimpan</span>`}
+function pkgTouch(path){if(!path.startsWith('packages.')||!S.draft)return;const i=path.split('.')[1],el=$('#pkgst'+i);if(el)el.outerHTML=pkgBadge(S.draft,i)}
+function tMem(){
+  const sw=isAdmin()?`<div class="grid2" style="margin-top:12px"><button class="${S.memView==='pkg'?'ghost':''}" data-a="memView" data-v="list">👥 Member</button><button class="${S.memView==='pkg'?'':'ghost'}" data-a="memView" data-v="pkg">🎁 Paket & Promo</button></div>`:'';
+  return sw+(isAdmin()&&S.memView==='pkg'?tPkg():tMemList());
+}
+function tPkg(){
+  if(!S.draft)S.draft=clone(S.cfg);
+  const d=S.draft;
+  return `<h2 style="margin:12px 0 0">Paket & Promo Membership</h2>
+  <div class="card"><h2>Paket Membership & Promo</h2>${d.packages.map((p,i)=>`<div class="srow"><div style="margin-bottom:6px">${pkgBadge(d,i)}</div><label style="margin-top:0">Nama paket</label>${inp('packages.'+i+'.name',p.name)}
+   <label>Layanan</label><select data-p="packages.${i}.serviceId">${d.services.map(s=>`<option value="${s.id}" ${s.id===p.serviceId?'selected':''}>${esc(s.name)}</option>`).join('')}</select>
+   <div class="grid2"><div><label>Jumlah cuci (dibayar)</label>${inp('packages.'+i+'.visits',p.visits,'n')}</div><div><label>Gratis (bonus)</label>${inp('packages.'+i+'.bonus',p.bonus||0,'n')}</div></div>
+   <div class="grid2"><div><label>Harga paket</label>${inp('packages.'+i+'.price',p.price,'n')}</div><div><label>Masa berlaku (hari)</label>${inp('packages.'+i+'.days',p.days,'n')}</div></div>
+   ${(()=>{const sv=d.services.find(x=>x.id===p.serviceId)||{price:0},tot=(+p.visits||0)+(+p.bonus||0),norm=sv.price*tot;return `<div class="note n-info">Total didapat pelanggan: <b>${tot}x cuci</b>${p.bonus?' (gratis '+p.bonus+'x)':''}. Harga normal ${rp(norm)}${norm>p.price?', hemat '+rp(norm-p.price):''}.</div>`})()}<div class="row sp" style="margin-top:12px"><button class="sm bad" data-a="pkgDel" data-i="${i}">Hapus</button><button class="ok" data-a="pkgSave" data-i="${i}">Simpan paket ini</button></div></div>`).join('')}
+   <button class="ghost block" data-a="setAdd" data-k="packages">+ Paket</button></div>`;
+}
+function tMemList(){
+  return `<div class="row sp" style="margin-top:12px"><h2 style="margin:0">Member / Langganan</h2><button class="sm" data-a="memNew">+ Member</button></div>`+
+  (S.members.map(m=>{const exp=m.expires<today()||m.visitsLeft<=0;return `<div class="card"><div class="row sp"><b>${esc(m.name)} · ${esc(m.plate)}${m.demo?' <span class="tag">(contoh)</span>':''}</b><span class="badge ${exp?'b-batal':'b-selesai'}">${exp?'Habis/Kadaluarsa':'Aktif'}</span></div>
+  <div>${esc(m.pkgName)}</div><div class="mut">Sisa ${m.visitsLeft} dari ${m.visitsTotal}x${m.bonus?' (termasuk gratis '+m.bonus+'x)':''} · berlaku s/d ${fdate(m.expires)} · dibayar ${rp(m.paid)}</div>
+  <div class="row" style="margin-top:8px"><a class="btn ghost sm" href="tel:${esc(m.phone)}">📞 ${esc(m.phone)}</a><button class="sm ghost" data-a="notaMem" data-id="${m.id}">🧾 Nota</button>${isAdmin()?`<button class="sm ghost" data-a="memDel" data-id="${m.id}">Hapus</button>`:''}</div></div>`}).join('')||'<div class="card mut">Belum ada member.</div>');
+}
+function sheetMem(){
+  const d=S.sheet.d;
+  return `<div class="row sp"><h2 style="margin:0">Member baru</h2><button class="ghost sm" data-a="sheetClose">Tutup</button></div>
+  <label>Paket</label><select data-j="pkgId">${S.cfg.packages.map(p=>`<option value="${p.id}" ${p.id===d.pkgId?'selected':''}>${esc(p.name)} — ${rp(p.price)} · ${p.visits}x${p.bonus?' + gratis '+p.bonus+'x':''}</option>`).join('')}</select>
+  <label>Nama</label><input data-j="name" value="${esc(d.name)}"><label>No. HP</label><input data-j="phone" inputmode="tel" value="${esc(d.phone)}"><label>Plat nomor</label><input data-j="plate" value="${esc(d.plate)}" autocapitalize="characters" placeholder="L1234AB" style="text-transform:uppercase">
+  <label>Metode bayar</label><select data-j="payMethod">${METHODS.map(m=>`<option ${(d.payMethod||'Tunai')===m?'selected':''}>${m}</option>`).join('')}</select>
+  <button class="block" data-a="memSave">Daftarkan & catat pembayaran</button>`;
+}
+
+/* ----- komisi ----- */
+function tKom(){
+  const list=S.jobs.filter(j=>j.status==='selesai'&&(j.doneDate||'').startsWith(S.month)&&(isAdmin()||jst(j).includes(S.sess)));
+  const by={};list.forEach(j=>{const ids=jst(j),n=ids.length||1,share=Math.round((+j.commission||0)/n),sb=Math.round((+j.base||0)/n);ids.forEach(id=>{if(!isAdmin()&&id!==S.sess)return;const r=by[id]=by[id]||{n:0,sales:0,com:0,unpaid:0};r.n++;r.sales+=sb;r.com+=share;if(!paidFor(j,id))r.unpaid+=share})});
+  const ids=Object.keys(by);
+  return `<div class="row sp" style="margin-top:12px"><h2 style="margin:0">Komisi Karyawan</h2><input type="month" id="monthSel" value="${S.month}" style="width:auto"></div>
+  ${isAdmin()?`<div class="card"><h2>Pengaturan Komisi</h2><label>Persentase komisi default (%)</label><div class="row"><input id="rateIn" type="number" min="0" max="100" value="${S.cfg.commissionRate}" style="flex:1"><button data-a="komRate">Simpan</button></div><div class="mut" style="margin-top:6px">Persentase khusus per layanan diatur di menu Layanan.</div></div>`:''}
+  <div class="card scroll"><table><tr><th>Karyawan</th><th class="r">Cucian</th><th class="r">Komisi</th><th class="r">Belum dibayar</th></tr>
+  ${ids.map(id=>{const r=by[id];return `<tr><td>${esc((stf(id)||{}).name||'?')}</td><td class="r">${r.n}</td><td class="r">${rp(r.com)}</td><td class="r">${rp(r.unpaid)}${isAdmin()&&r.unpaid>0?`<br><button class="sm ok" data-a="komPay" data-id="${id}">Tandai dibayar</button>`:''}</td></tr>`}).join('')||'<tr><td colspan="4" class="mut">Belum ada pekerjaan selesai bulan ini.</td></tr>'}</table></div>
+  <div class="mut">Komisi = harga layanan × persentase (default ${S.cfg.commissionRate}%, bisa diatur per layanan di menu Layanan). Cucian member tetap dihitung dari harga normal. Jika dikerjakan lebih dari 1 karyawan, komisi dibagi rata.</div>`;
+}
+
+/* ----- settings ----- */
+function inp(path,val,type,extra){return `<input data-p="${path}" ${type==='n'?'type="number" data-n="1"':''} value="${esc(val)}" ${extra||''}>`}
+function tSet(){
+  if(!S.draft)S.draft=clone(S.cfg);
+  const d=S.draft;
+  return `<h2 style="margin:12px 0 0">Pengaturan</h2>
+  <div class="card"><h2>Branding</h2><div class="row">${(()=>{return `<div class="logo">${d.brand.logo?`<img src="${esc(d.brand.logo)}">`:esc((d.brand.name||'B')[0])}</div>`})()}
+  <label class="btn ghost sm" for="logoF" style="margin:0">Ganti logo</label><input type="file" id="logoF" accept="image/*">${d.brand.logo?'<button class="sm ghost" data-a="logoDel">Hapus</button>':''}</div>
+  <label>Nama usaha</label>${inp('brand.name',d.brand.name)}<label>Slogan</label>${inp('brand.tagline',d.brand.tagline)}
+  <label>Warna utama</label><input type="color" data-p="brand.color" value="${esc(d.brand.color)}" style="height:44px;padding:3px"></div>
+  <div class="card"><h2>Alamat & Kontak</h2><label>Alamat</label><textarea data-p="contact.address">${esc(d.contact.address)}</textarea>
+  <label>Jam buka</label>${inp('contact.hours',d.contact.hours)}<label>Telepon (tampilan)</label>${inp('contact.phones',d.contact.phones)}<label>Nomor WhatsApp (format 62...)</label>${inp('contact.wa',d.contact.wa,'',' inputmode="tel"')}</div>
+
+
+
+  <button class="block ok" data-a="setSave">Simpan Pengaturan</button>`;
+}
+
+
+function tSvc(){
+  if(!S.draft)S.draft=clone(S.cfg);
+  const d=S.draft;
+  return `<h2 style="margin:12px 0 0">Layanan</h2>
+  <div class="card"><h2>Tampilan daftar harga (pelanggan)</h2><select data-p="priceView"><option value="tabs" ${d.priceView!=='list'?'selected':''}>Ringkas: tab kategori, ketuk untuk detail</option><option value="list" ${d.priceView==='list'?'selected':''}>Lengkap: daftar panjang (tampilan lama)</option></select><div class="tag" style="margin-top:6px">Ganti lalu tekan Simpan Layanan. Bisa dikembalikan kapan saja.</div></div>
+  <div class="card"><h2>Daftar Layanan & Harga</h2><div class="mut" style="margin-bottom:6px">Komisi default ${d.commissionRate}% (ubah di menu Komisi). Isi kolom Komisi % untuk mengganti per layanan.</div>${d.services.map((s,i)=>`<div class="srow"><label style="margin-top:0">Nama</label>${inp('services.'+i+'.name',s.name)}
+   <div class="grid2"><div><label>Harga</label>${inp('services.'+i+'.price',s.price,'n')}</div><div><label>Komisi % (kosong = default)</label>${inp('services.'+i+'.rate',s.rate,'n')}</div></div>
+   <label>Kategori (untuk tab daftar harga)</label>${inp('services.'+i+'.cat',s.cat||'')}
+   <label>Lama pengerjaan (menit)</label>${inp('services.'+i+'.duration',s.duration,'n')}
+   <div class="grid2"><div><label>Jenis</label><select data-p="services.${i}.type"><option value="mobil" ${s.type==='mobil'?'selected':''}>Mobil</option><option value="motor" ${s.type==='motor'?'selected':''}>Motor</option></select></div><div><label>Keterangan</label>${inp('services.'+i+'.desc',s.desc)}</div></div>
+   <button class="sm bad" style="margin-top:8px" data-a="setDel" data-k="services" data-i="${i}">Hapus</button></div>`).join('')}
+   <button class="ghost block" data-a="setAdd" data-k="services">+ Layanan</button></div>
+  <button class="block ok" data-a="setSave">Simpan Layanan</button>`;
+}
+function tStf(){
+  if(!S.draft)S.draft=clone(S.cfg);
+  const d=S.draft;
+  return `<h2 style="margin:12px 0 0">Karyawan</h2>
+  <div class="card"><h2>Daftar Karyawan & Akun Login</h2>${d.staff.map((u,i)=>`<div class="srow"><div class="grid2"><div><label style="margin-top:0">Nama</label>${inp('staff.'+i+'.name',u.name)}</div><div><label style="margin-top:0">Role</label><select data-p="staff.${i}.role"><option value="staff" ${u.role==='staff'?'selected':''}>Karyawan</option><option value="admin" ${u.role==='admin'?'selected':''}>Admin</option></select></div></div>
+   <div class="grid2"><div><label>Username</label>${inp('staff.'+i+'.username',u.username,'',' autocapitalize="none"')}</div><div><label>PIN</label>${inp('staff.'+i+'.pin',u.pin,'',' inputmode="numeric"')}</div></div>
+   <div class="row sp" style="margin-top:8px"><label style="margin:0"><input type="checkbox" data-p="staff.${i}.active" data-c="1" ${u.active?'checked':''}> Aktif</label><button class="sm bad" data-a="setDel" data-k="staff" data-i="${i}">Hapus</button></div></div>`).join('')}
+   <button class="ghost block" data-a="setAdd" data-k="staff">+ Karyawan</button></div>
+  <button class="block ok" data-a="setSave">Simpan Karyawan</button>`;
+}
+
+/* ----- nota & keuangan ----- */
+const METHODS=['Tunai','QRIS','Transfer'];
+const EXP_CATS=['Bahan','Listrik & Air','Gaji/Upah','Sewa','Peralatan','Promosi','Lain-lain'];
+const fdt=v=>new Date(v||Date.now()).toLocaleString('id-ID',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+function nextNota(prefix,dateStr){
+  const pre=prefix+'-'+dateStr.replace(/-/g,'').slice(2)+'-';
+  const n=S.jobs.concat(S.members).filter(x=>(x.notaNo||'').startsWith(pre)).length+1;
+  return pre+String(n).padStart(3,'0');
+}
+async function copyText(t){
+  try{await navigator.clipboard.writeText(t);toast('Tersalin')}
+  catch(e){const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('Tersalin')}catch(_){toast('Gagal menyalin')}ta.remove()}
+}
+function notaData(){
+  const sh=S.sheet;
+  if(sh.kind==='mem'){const m=S.members.find(x=>x.id===sh.id);if(!m)return null;
+    return {no:m.notaNo||('MB-'+m.id.slice(-5).toUpperCase()),at:m.createdAt,customer:m.name,phone:m.phone,plate:m.plate,staff:'',lines:[[m.pkgName,+m.paid]],notes:[m.visitsTotal+'x cuci'+(m.bonus?' (termasuk gratis '+m.bonus+'x)':'')+', berlaku s/d '+fdate(m.expires)],total:+m.paid,method:m.payMethod||'Tunai'}}
+  const j=S.jobs.find(x=>x.id===sh.id);if(!j)return null;
+  const sv=svc(j.serviceId),base=+j.base||sv.price,lines=[[sv.name,base]],notes=[];
+  if(j.memberId){const m=S.members.find(x=>x.id===j.memberId);lines.push(['Paket member',-base]);notes.push('Dibayar dengan paket member'+(m?' · sisa '+m.visitsLeft+'x':''))}
+  else if(j.reward){if(+j.price<base)lines.push(['Hadiah: '+j.reward.text,-(base-j.price)]);else notes.push('Hadiah: '+j.reward.text)}
+  else if(j.loyaltyFree)lines.push(['Hadiah loyalitas',-base]);
+  else if(+j.price<base)lines.push(['Potongan',-(base-j.price)]);
+  return {no:j.notaNo||('NT-'+j.id.slice(-5).toUpperCase()),at:j.doneAt||(j.doneDate?j.doneDate+'T12:00:00':j.createdAt),customer:j.customer,phone:j.phone,plate:j.plate,staff:jst(j).map(i=>(stf(i)||{}).name||'').filter(Boolean).join(', '),lines,notes,total:+j.price||0,method:+j.price>0?(j.payMethod||'Tunai'):'-'};
+}
+function notaText(n){
+  const c=S.cfg,k=c.contact,L=[c.brand.name,k.address,k.phones,'------------------------','No: '+n.no,'Tgl: '+fdt(n.at)];
+  if(n.customer)L.push('Pelanggan: '+n.customer);if(n.plate)L.push('Plat: '+n.plate);if(n.staff)L.push('Karyawan: '+n.staff);
+  L.push('------------------------');n.lines.forEach(x=>L.push(x[0]+': '+(x[1]<0?'-':'')+rp(Math.abs(x[1]))));n.notes.forEach(x=>L.push(x));
+  L.push('------------------------','TOTAL: '+rp(n.total),'Bayar: '+n.method,'','Terima kasih 🙏');
+  return L.join('\n');
+}
+function sheetNota(){
+  const n=notaData();if(!n)return'<div class="row sp"><b>Nota tidak ditemukan</b><button class="ghost sm" data-a="sheetClose">Tutup</button></div>';
+  const c=S.cfg,k=c.contact;
+  return `<div class="row sp noprint"><h2 style="margin:0">Nota</h2><button class="ghost sm" data-a="sheetClose">Tutup</button></div>
+  <div class="rcpt" id="receipt">
+   <div class="c">${c.brand.logo?`<img src="${esc(c.brand.logo)}" alt=""><br>`:''}<b>${esc(c.brand.name)}</b><br>${esc(k.address)}<br>${esc(k.phones)}</div><hr>
+   <div class="r"><span>No</span><span>${esc(n.no)}</span></div><div class="r"><span>Tgl</span><span>${esc(fdt(n.at))}</span></div>
+   ${n.customer?`<div class="r"><span>Pelanggan</span><span>${esc(n.customer)}</span></div>`:''}${n.plate?`<div class="r"><span>Plat</span><span>${esc(n.plate)}</span></div>`:''}${n.staff?`<div class="r"><span>Karyawan</span><span>${esc(n.staff)}</span></div>`:''}<hr>
+   ${n.lines.map(x=>`<div class="r"><span>${esc(x[0])}</span><span>${x[1]<0?'-':''}${rp(Math.abs(x[1]))}</span></div>`).join('')}
+   ${n.notes.map(x=>`<div>${esc(x)}</div>`).join('')}<hr>
+   <div class="r t"><span>TOTAL</span><span>${rp(n.total)}</span></div><div class="r"><span>Bayar</span><span>${esc(n.method)}</span></div><hr>
+   <div class="c">${esc(c.brand.tagline||'')}<br>Terima kasih 🙏</div></div>
+  <div class="row noprint" style="margin-top:12px;justify-content:center"><button data-a="doPrint">🖨️ Cetak</button><a class="btn ok" target="_blank" href="${esc(waLink(n.phone,notaText(n)))}">💬 Kirim WA</a><button class="ghost" data-a="notaCopy">Salin</button></div>
+  <div class="tag noprint" style="text-align:center;margin-top:8px">Jika dialog cetak tidak muncul, gunakan Kirim WA atau Salin.</div>${thermalUI(notaThermal(n,S.paper||32),'notaCopyT')}`;
+}
+
+/* keuangan */
+function finBounds(){
+  const t=today();let f=t.slice(0,8)+'01',e=t;
+  if(S.finRange==='today')f=t;
+  else if(S.finRange==='week')f=addDays(t,-6);
+  else if(S.finRange==='last'){const d=new Date(t+'T00:00:00');f=ymd(new Date(d.getFullYear(),d.getMonth()-1,1));e=ymd(new Date(d.getFullYear(),d.getMonth(),0))}
+  else if(S.finRange==='custom'){f=S.finFrom||t;e=S.finTo||t;if(e<f)e=f}
+  return [f,e];
+}
+function finData(){
+  const [f,e]=finBounds(),inR=d=>!!d&&d>=f&&d<=e;
+  const jobs=S.jobs.filter(j=>j.status==='selesai'&&!j.demo&&inR(j.doneDate));
+  const mems=S.members.filter(m=>!m.demo&&inR(m.created));
+  const exps=S.expenses.filter(x=>inR(x.date)).sort((a,b)=>b.date.localeCompare(a.date)||(b.createdAt||'').localeCompare(a.createdAt||''));
+  const sum=(a,fn)=>a.reduce((t,x)=>t+(+fn(x)||0),0);
+  const incJ=sum(jobs,j=>j.price),incM=sum(mems,m=>m.paid),com=sum(jobs,j=>j.commission),expT=sum(exps,x=>x.amount);
+  const meth={},cat={},svcs={},ecat={},perDay={};
+  const add=(o,k,v)=>{o[k]=(o[k]||0)+v},day=(d,k,v)=>{(perDay[d]=perDay[d]||{in:0,out:0})[k]+=v};
+  jobs.forEach(j=>{const v=+j.price||0;if(v>0)add(meth,j.payMethod||'Tunai',v);const sv=svc(j.serviceId);add(cat,sv.cat||'Lainnya',v);const r=svcs[sv.name]=svcs[sv.name]||{n:0,v:0};r.n++;r.v+=v;day(j.doneDate,'in',v)});
+  mems.forEach(m=>{const v=+m.paid||0;add(meth,m.payMethod||'Tunai',v);add(cat,'Paket Member',v);day(m.created,'in',v)});
+  exps.forEach(x=>{const v=+x.amount||0;add(ecat,x.cat||'Lain-lain',v);day(x.date,'out',v)});
+  return {f,e,jobs,mems,exps,incJ,incM,inc:incJ+incM,com,expT,out:expT+com,net:incJ+incM-expT-com,meth,cat,svcs,ecat,perDay,tx:jobs.length+mems.length,paidTx:jobs.filter(j=>+j.price>0).length+mems.length};
+}
+const kv=(o)=>Object.entries(o).sort((a,b)=>b[1]-a[1]);
+function tFin(){
+  const D=finData();
+  const chip=(v,t)=>`<button class="sm ${S.finRange===v?'':'ghost'}" data-a="finR" data-v="${v}">${t}</button>`;
+  const days=[];if(D.f<=D.e){let d=D.f,g=0;while(d<=D.e&&g<62){days.push(d);d=addDays(d,1);g++}}
+  const mx=Math.max(1,...days.map(d=>Math.max((D.perDay[d]||{}).in||0,(D.perDay[d]||{}).out||0)));
+  const row=(a,b,bold)=>`<div class="li"><div${bold?' style="font-weight:700"':''}>${a}</div><div class="price">${b}</div></div>`;
+  const list=(o,empty)=>kv(o).map(([k,v])=>row(esc(k),rp(v))).join('')||`<div class="mut">${empty||'Belum ada data.'}</div>`;
+  const top=Object.entries(D.svcs).sort((a,b)=>b[1].v-a[1].v).slice(0,5);
+  return `<h2 style="margin:12px 0 0">Keuangan</h2>
+  <div class="chips" style="padding-top:8px">${chip('today','Hari ini')}${chip('week','7 hari')}${chip('month','Bulan ini')}${chip('last','Bulan lalu')}${chip('custom','Atur tanggal')}</div>
+  ${S.finRange==='custom'?`<div class="grid2"><div><label>Dari</label><input type="date" id="finFrom" value="${D.f}"></div><div><label>Sampai</label><input type="date" id="finTo" value="${D.e}"></div></div>`:''}
+  <div class="mut" style="margin:6px 0">${fdate(D.f)} – ${fdate(D.e)}</div>
+  <div class="grid2"><div class="stat">Pemasukan<b style="color:var(--ok)">${rp(D.inc)}</b></div><div class="stat">Pengeluaran<b style="color:var(--bad)">${rp(D.out)}</b></div>
+  <div class="stat">Laba bersih<b>${rp(D.net)}</b></div><div class="stat">Transaksi<b>${D.tx}</b></div></div>
+  <div class="card"><h2>Ringkasan</h2>${row('Pemasukan cuci & layanan',rp(D.incJ))}${row('Pemasukan paket member',rp(D.incM))}${row('Total pemasukan',rp(D.inc),1)}
+  ${row('Pengeluaran operasional',rp(D.expT))}${row('Komisi karyawan (dari pekerjaan)',rp(D.com))}${row('Total pengeluaran',rp(D.out),1)}${row('Laba bersih',rp(D.net),1)}
+  ${row('Rata-rata per transaksi berbayar',rp(D.paidTx?D.inc/D.paidTx:0))}</div>
+  <div class="card"><h2>Pemasukan per metode bayar</h2>${list(D.meth)}</div>
+  <div class="card"><h2>Pemasukan per kategori</h2>${list(D.cat)}</div>
+  <div class="card"><h2>Layanan terlaris</h2>${top.map(([n,r])=>row(esc(n)+' <span class="tag">'+r.n+'x</span>',rp(r.v))).join('')||'<div class="mut">Belum ada data.</div>'}</div>
+  ${days.length>1?`<div class="card"><h2>Per hari</h2><div class="tag"><span style="color:var(--pri)">■</span> pemasukan &nbsp; <span style="color:var(--bad)">■</span> pengeluaran</div>
+  <div class="fbars">${days.map(d=>{const x=D.perDay[d]||{in:0,out:0};return `<div class="d" title="${d}"><i style="height:${Math.round(x.in/mx*100)}%;background:var(--pri)"></i><i style="height:${Math.round(x.out/mx*100)}%;background:var(--bad)"></i></div>`}).join('')}</div>
+  <div class="row sp tag"><span>${fdate(D.f)}</span><span>${fdate(D.e)}</span></div></div>`:''}
+  <div class="card"><div class="row sp"><h2 style="margin:0">Pengeluaran</h2><button class="sm" data-a="expNew">+ Pengeluaran</button></div>
+  ${kv(D.ecat).length?`<div class="tag" style="margin-top:6px">${kv(D.ecat).map(([k,v])=>esc(k)+': '+rp(v)).join(' · ')}</div>`:''}
+  ${D.exps.map(x=>`<div class="li" style="cursor:pointer" data-a="expOpen" data-id="${x.id}"><div><b>${esc(x.desc||x.cat)}</b><div class="tag">${fdate(x.date)} · ${esc(x.cat)}</div></div><div class="price">${rp(x.amount)}</div></div>`).join('')||'<div class="mut" style="margin-top:8px">Belum ada pengeluaran di periode ini.</div>'}
+  <div class="tag" style="margin-top:6px">Komisi karyawan dihitung otomatis dari pekerjaan selesai, tidak perlu dicatat lagi di sini.</div></div>
+  <button class="block" data-a="repOpen">🖨️ Cetak / bagikan laporan</button>
+  <div class="tag" style="margin-top:6px">Data contoh tidak dihitung di laporan.</div>`;
+}
+function sheetExp(){
+  const d=S.sheet.d;
+  return `<div class="row sp"><h2 style="margin:0">${d._new?'Pengeluaran baru':'Ubah pengeluaran'}</h2><button class="ghost sm" data-a="sheetClose">Tutup</button></div>
+  <label>Tanggal</label><input type="date" data-j="date" value="${esc(d.date)}">
+  <label>Kategori</label><select data-j="cat">${EXP_CATS.map(c=>`<option ${d.cat===c?'selected':''}>${c}</option>`).join('')}</select>
+  <label>Keterangan</label><input data-j="desc" value="${esc(d.desc)}" placeholder="Contoh: Sabun & wax">
+  <label>Jumlah (Rp)</label><input type="number" min="0" data-j="amount" data-n="1" value="${d.amount||''}" inputmode="numeric">
+  <div class="row" style="margin-top:16px"><button class="ok" data-a="expSave">Simpan</button>${d._new?'':'<button class="bad sm" data-a="expDel">Hapus</button>'}</div>`;
+}
+function repText(D){
+  const c=S.cfg,L=['LAPORAN KEUANGAN',c.brand.name,fdate(D.f)+' - '+fdate(D.e),'------------------------',
+   'Pemasukan layanan: '+rp(D.incJ),'Pemasukan paket member: '+rp(D.incM),'TOTAL PEMASUKAN: '+rp(D.inc),'',
+   'Pengeluaran operasional: '+rp(D.expT),'Komisi karyawan: '+rp(D.com),'TOTAL PENGELUARAN: '+rp(D.out),'',
+   'LABA BERSIH: '+rp(D.net),'Transaksi: '+D.tx,'','Per metode bayar:'];
+  kv(D.meth).forEach(([k,v])=>L.push('- '+k+': '+rp(v)));L.push('','Pengeluaran per kategori:');
+  kv(D.ecat).forEach(([k,v])=>L.push('- '+k+': '+rp(v)));
+  return L.join('\n');
+}
+function sheetRep(){
+  const D=finData(),c=S.cfg;
+  const tr=(a,b,cls)=>`<tr class="${cls||''}"><td>${a}</td><td style="text-align:right">${b}</td></tr>`;
+  return `<div class="row sp noprint"><h2 style="margin:0">Laporan</h2><button class="ghost sm" data-a="sheetClose">Tutup</button></div>
+  <div class="rpt" id="report"><div style="text-align:center"><b style="font-size:16px">LAPORAN KEUANGAN</b><br>${esc(c.brand.name)}<br>${fdate(D.f)} – ${fdate(D.e)}</div>
+  <h3>Ringkasan</h3><table>${tr('Pemasukan layanan',rp(D.incJ))}${tr('Pemasukan paket member',rp(D.incM))}${tr('Total pemasukan',rp(D.inc),'tot')}${tr('Pengeluaran operasional',rp(D.expT))}${tr('Komisi karyawan',rp(D.com))}${tr('Total pengeluaran',rp(D.out),'tot')}${tr('Laba bersih',rp(D.net),'tot')}${tr('Jumlah transaksi',D.tx)}</table>
+  <h3>Per metode bayar</h3><table>${kv(D.meth).map(([k,v])=>tr(esc(k),rp(v))).join('')||tr('-','-')}</table>
+  <h3>Pemasukan per kategori</h3><table>${kv(D.cat).map(([k,v])=>tr(esc(k),rp(v))).join('')||tr('-','-')}</table>
+  <h3>Rincian pengeluaran</h3><table>${D.exps.map(x=>tr(fdate(x.date)+' · '+esc(x.desc||x.cat)+' <i>('+esc(x.cat)+')</i>',rp(x.amount))).join('')||tr('Tidak ada','-')}</table></div>
+  <div class="row noprint" style="margin-top:12px;justify-content:center"><button data-a="doPrint">🖨️ Cetak</button><a class="btn ok" target="_blank" href="${esc(waLink('',repText(D)))}">💬 Bagikan WA</a><button class="ghost" data-a="repCopy">Salin</button></div>
+  <div class="tag noprint" style="text-align:center;margin-top:8px">Jika dialog cetak tidak muncul, gunakan Bagikan WA atau Salin.</div>${thermalUI(repThermal(D,S.paper||32),'repCopyT')}`;
+}
+
+/* ----- format teks printer thermal ----- */
+const asc=t=>String(t==null?'':t).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^\x20-\x7E]/g,'');
+function wrapT(t,W){const w=asc(t).split(/\s+/).filter(Boolean),o=[];let l='';
+  w.forEach(x=>{while(x.length>W){if(l){o.push(l);l=''}o.push(x.slice(0,W));x=x.slice(W)}
+    if(!l)l=x;else if((l+' '+x).length<=W)l+=' '+x;else{o.push(l);l=x}});
+  if(l)o.push(l);return o}
+const ctr=(t,W)=>wrapT(t,W).map(l=>' '.repeat(Math.max(0,Math.floor((W-l.length)/2)))+l);
+function lr(a,b,W){a=asc(a);b=asc(b);const room=W-b.length-1;
+  if(a.length<=room)return [a+' '.repeat(W-a.length-b.length)+b];
+  const o=wrapT(a,W);o.push(' '.repeat(Math.max(0,W-b.length))+b);return o}
+function notaThermal(n,W){
+  const c=S.cfg,k=c.contact,hr='-'.repeat(W),L=[];
+  L.push(...ctr(String(c.brand.name).toUpperCase(),W),...ctr(k.address,W),...ctr(k.phones,W),hr);
+  L.push(...lr('No',n.no,W),...lr('Tgl',fdt(n.at),W));
+  if(n.customer)L.push(...lr('Pelanggan',n.customer,W));
+  if(n.plate)L.push(...lr('Plat',n.plate,W));
+  if(n.staff)L.push(...lr('Karyawan',n.staff,W));
+  L.push(hr);
+  n.lines.forEach(x=>L.push(...lr(x[0],(x[1]<0?'-':'')+rp(Math.abs(x[1])),W)));
+  n.notes.forEach(x=>L.push(...wrapT(x,W)));
+  L.push(hr,...lr('TOTAL',rp(n.total),W),...lr('Bayar',n.method,W),hr,...ctr(c.brand.tagline||'',W),...ctr('Terima kasih',W),'','');
+  return L.join('\n');
+}
+function repThermal(D,W){
+  const c=S.cfg,hr='-'.repeat(W);
+  const L=[...ctr('LAPORAN KEUANGAN',W),...ctr(c.brand.name,W),...ctr(fdate(D.f)+' - '+fdate(D.e),W),hr,
+   ...lr('Pemasukan layanan',rp(D.incJ),W),...lr('Paket member',rp(D.incM),W),...lr('TOTAL MASUK',rp(D.inc),W),hr,
+   ...lr('Pengeluaran',rp(D.expT),W),...lr('Komisi',rp(D.com),W),...lr('TOTAL KELUAR',rp(D.out),W),hr,
+   ...lr('LABA BERSIH',rp(D.net),W),...lr('Transaksi',String(D.tx),W),hr];
+  kv(D.meth).forEach(([k,v])=>L.push(...lr(k,rp(v),W)));
+  L.push('','');return L.join('\n');
+}
+function thermalUI(text,copyAct){
+  const W=S.paper||32;
+  return `<div class="noprint" style="margin-top:14px"><div class="row"><span class="tag">Printer thermal, lebar kertas:</span><button class="sm ${W===32?'':'ghost'}" data-a="paper" data-v="32">58 mm</button><button class="sm ${W===48?'':'ghost'}" data-a="paper" data-v="48">80 mm</button></div>
+  <pre style="font:11px/1.35 ui-monospace,Menlo,Consolas,monospace;background:#fff;color:#000;border:1px dashed #bbb;border-radius:8px;padding:8px;overflow-x:auto;margin:8px 0;white-space:pre">${esc(text)}</pre>
+  <button class="block" data-a="${copyAct}">📋 Salin untuk printer thermal</button>
+  <div class="tag" style="margin-top:6px">Tempel ke aplikasi printer thermal (misalnya RawBT atau Bluetooth Print) memakai font monospace.</div></div>`;
+}
+
+/* ----- jam booking ----- */
+const timeSlots=()=>{const a=[];for(let h=7;h<20;h++){a.push(pad(h)+':00');a.push(pad(h)+':30')}return a};
+const timePassed=(d,t)=>d<today()||(d===today()&&t<=hm());
+const slotsLeft=d=>timeSlots().some(t=>!timePassed(d,t));
+function timeOptions(d){let first=true;return timeSlots().map(t=>{const off=timePassed(d,t),sel=!off&&first;if(sel)first=false;return `<option value="${t}" ${off?'disabled':''} ${sel?'selected':''}>${t}${off?' (lewat)':''}</option>`}).join('')}
+
+/* ----- data contoh ----- */
+function demoData(){
+  const jobs=[],mem=[];let n=0;
+  const price=sid=>(S.cfg.services.find(x=>x.id===sid)||DEF.services.find(x=>x.id===sid)).price;
+  const mk=(c,off,sid,o)=>{const d=addDays(today(),-off),pr=price(sid),iso=new Date(d+'T09:00:00').toISOString();n++;
+    jobs.push(Object.assign({id:'demo_j'+String(n).padStart(3,'0'),demo:true,bookingId:'',customer:c.name,phone:c.phone,plate:c.plate,vehicle:c.v,serviceId:sid,price:pr,memberId:'',loyaltyFree:false,staffIds:[],staffId:'',status:'selesai',before:[],after:[],createdDate:d,createdAt:iso,startedAt:iso,doneDate:d,base:pr,commission:0,paid:true},o||{}))};
+  const H={name:'Pak Hendra',phone:'081200000001',plate:'L1234AB',v:'mobil'},R={name:'Mas Rudi',phone:'081200000002',plate:'N4321EF',v:'motor'},
+        S1={name:'Bu Sari',phone:'081200000003',plate:'W5678CD',v:'mobil'},D={name:'Bu Dewi',phone:'081200000004',plate:'S2468IJ',v:'mobil'},
+        B={name:'Pak Budi',phone:'081200000005',plate:'L1357KL',v:'mobil'},A={name:'Pak Agus',phone:'081200000006',plate:'L9876GH',v:'mobil'};
+  for(let i=0;i<23;i++)mk(H,5+10*i,'s3',i===11?{loyaltyFree:true,price:0}:{});
+  for(let i=0;i<14;i++)mk(R,2+7*i,'s1');
+  const memOff=[3,10,24,31,45,52];
+  [3,10,17,24,31,38,45,52,59].forEach(o=>mk(S1,o,'s3',memOff.includes(o)?{memberId:'demo_m1',price:0}:{}));
+  for(let i=0;i<8;i++)mk(D,38+12*i,'s3');
+  for(let i=0;i<11;i++)mk(B,54+9*i,'s3');
+  mk(A,72,'s9');mk(A,110,'s4');mk(A,150,'s3');
+  const cr=addDays(today(),-62);
+  mem.push({id:'demo_m1',demo:true,name:'Bu Sari',phone:S1.phone,plate:S1.plate,pkgId:'p4',pkgName:'Promo Cuci 10x Gratis 1x (Car Wash)',serviceId:'s3',visitsLeft:5,visitsTotal:11,bonus:1,expires:addDays(cr,180),paid:500000,created:cr,createdAt:new Date(cr+'T09:00:00').toISOString()});
+  return {jobs,mem};
+}
+const pause=ms=>new Promise(r=>setTimeout(r,ms));
+
+/* ----- pelanggan & loyalitas ----- */
+const daysSince=d=>d?Math.round((new Date(today()+'T00:00:00')-new Date(d+'T00:00:00'))/864e5):null;
+function loyCfg(){const L=S.cfg.loyalty||{};return {on:!!L.on,every:Math.max(2,+L.every||10),type:L.type||'free',text:L.text||'Cuci gratis 1x',pct:+L.pct||0,max:+L.maxPrice||0}}
+function cbCfg(){const C=S.cfg.comeback||{};return {on:!!C.on,type:C.type||'discount',text:C.text||'Diskon 20% untuk kunjungan berikutnya',pct:C.pct!=null?+C.pct:20,max:+C.maxPrice||0}}
+const rewardOk=(o,price)=>o.type==='other'||!o.max||price<=o.max;
+function clearReward(d){d.reward=null;d.loyaltyFree=false;d.price=svc(d.serviceId).price}
+function applyReward(d,kind){
+  const c=kind==='loyal'?loyCfg():cbCfg(),base=svc(d.serviceId).price;
+  d.reward={kind,type:c.type,text:c.text,pct:c.pct};d.memberId='';
+  if(c.type==='free'){d.price=0;d.loyaltyFree=true}
+  else if(c.type==='discount'){d.price=Math.round(base*(100-Math.min(100,c.pct))/100);d.loyaltyFree=false}
+  else{d.price=base;d.loyaltyFree=false}
+}
+const payLbl=j=>j.memberId?'Member':j.reward?(j.price>0?rp(j.price)+' · '+esc(j.reward.text):'Hadiah: '+esc(j.reward.text)):j.loyaltyFree?'Gratis (loyalitas)':rp(j.price);
+function custStats(){
+  const by={};
+  const get=pl=>by[pl]=by[pl]||{plate:pl,name:'',phone:'',visits:0,member:0,paid:0,free:0,spent:0,last:'',jobs:[]};
+  S.jobs.filter(j=>j.status==='selesai').forEach(j=>{const pl=normPlate(j.plate);if(!pl)return;const c=get(pl);
+    c.visits++;c.jobs.push(j);if(j.demo)c.demo=true;
+    if(j.memberId)c.member++;else if(j.loyaltyFree||(j.reward&&j.reward.kind==='loyal'))c.free++;else c.paid++;
+    c.spent+=+j.price||0;
+    if((j.doneDate||'')>=c.last){c.last=j.doneDate||'';c.name=j.customer||c.name;c.phone=j.phone||c.phone}});
+  S.members.forEach(m=>{const pl=normPlate(m.plate);if(!pl)return;const c=get(pl);c.spent+=+m.paid||0;if(!c.name){c.name=m.name;c.phone=m.phone}});
+  return by;
+}
+const custOf=pl=>custStats()[pl];
+function loyInfo(c){const L=loyCfg();const paid=c?c.paid:0,free=c?c.free:0;return Object.assign({},L,{N:L.every,prog:paid%L.every,avail:Math.max(0,Math.floor(paid/L.every)-free)})}
+function isInactive(c){return !!c&&c.visits>0&&daysSince(c.last)>(+S.cfg.inactiveDays||30)}
+function loyHtml(d){
+  if(d.memberId)return'';
+  const pl=normPlate(d.plate);if(pl.length<3)return'';
+  if(d.reward||d.loyaltyFree){const t=d.reward?d.reward.text:'Gratis cuci';return `<div class="note n-ok">🎁 Hadiah dipakai: <b>${esc(t)}</b>${d.reward&&d.reward.type==='other'?' (serahkan hadiahnya ke pelanggan)':''} <button class="sm ghost" data-a="loyCancel">Batalkan</button></div>`}
+  const c=custOf(pl),li=loyInfo(c),cb=cbCfg(),price=svc(d.serviceId).price,out=[];
+  if(li.on){
+    if(li.avail>0){
+      if(rewardOk(li,price))out.push(`<div class="note n-ok">🎁 Plat ${pl} berhak <b>${esc(li.text)}</b> (${li.avail}x, tiap ${li.N} cuci berbayar). <button class="sm ok" data-a="loyUse" data-k="loyal">Pakai hadiah</button></div>`);
+      else out.push(`<div class="note n-info">🎁 Ada hadiah (${esc(li.text)}), tapi tidak berlaku untuk layanan ini.</div>`)}
+    else out.push(`<div class="note n-info">Loyalitas: cuci berbayar ${li.prog}/${li.N} menuju hadiah.</div>`)}
+  if(cb.on&&isInactive(c)&&rewardOk(cb,price))out.push(`<div class="note n-warn">💤 Pelanggan kembali setelah ${daysSince(c.last)} hari. Hadiah: <b>${esc(cb.text)}</b> <button class="sm ok" data-a="loyUse" data-k="comeback">Pakai hadiah</button></div>`);
+  return out.join('');
+}
+function loyTag(plate,serviceId){
+  const pl=normPlate(plate);if(pl.length<3)return'';
+  const c=custOf(pl),li=loyInfo(c),cb=cbCfg(),price=svc(serviceId).price;let h='';
+  if(li.on&&li.avail>0&&rewardOk(li,price))h+=`<div class="note n-ok">🎁 Berhak: ${esc(li.text)} (${li.avail}x)</div>`;
+  if(cb.on&&isInactive(c)&&rewardOk(cb,price))h+=`<div class="note n-warn">💤 Pelanggan lama: ${esc(cb.text)}</div>`;
+  return h;
+}
+function waLink(phone,text){let n=String(phone||'').replace(/\D/g,'');if(n.startsWith('0'))n='62'+n.slice(1);return 'https://wa.me/'+n+'?text='+encodeURIComponent(text)}
+function custRows(){
+  const td=today(),cb=cbCfg();
+  const arr=Object.values(custStats());
+  arr.forEach(c=>{c.days=daysSince(c.last);c.inactive=isInactive(c);c.li=loyInfo(c);c.avail=c.li.on?c.li.avail:0;c.cbElig=cb.on&&c.inactive;c.memActive=S.members.some(m=>normPlate(m.plate)===c.plate&&m.visitsLeft>0&&m.expires>=td)});
+  return arr;
+}
+function custListHtml(){
+  let arr=custRows();const q=normPlate(S.custQ||''),qt=(S.custQ||'').toLowerCase().trim();
+  if(S.custF==='inactive')arr=arr.filter(c=>c.inactive);
+  if(S.custF==='reward')arr=arr.filter(c=>c.avail>0||c.cbElig);
+  if(qt)arr=arr.filter(c=>(q&&c.plate.includes(q))||String(c.name||'').toLowerCase().includes(qt));
+  arr.sort((a,b)=>(b.last||'').localeCompare(a.last||''));
+  return arr.map(c=>`<div class="card" data-a="custOpen" data-pl="${esc(c.plate)}" style="cursor:pointer"><div class="row sp"><b>${esc(c.plate)}</b>${c.demo?' <span class="tag">(contoh)</span>':''}<span class="row" style="gap:4px">${c.inactive?`<span class="badge b-batal">💤 ${c.days} hari</span>`:''}${c.avail>0||c.cbElig?`<span class="badge b-selesai">🎁 Hadiah${c.avail>1?' x'+c.avail:''}</span>`:''}${c.memActive?'<span class="badge">🎫 Member</span>':''}</span></div>
+  <div>${esc(c.name||'-')}${c.phone?' · '+esc(c.phone):''}</div>
+  <div class="mut">${c.visits}x datang (${c.paid} berbayar${c.member?', '+c.member+' member':''}${c.free?', '+c.free+' hadiah dipakai':''}) · terakhir ${c.last?fdate(c.last)+' ('+c.days+' hari lalu)':'-'}</div>
+  <div class="row sp" style="margin-top:4px"><span class="price">Total belanja ${rp(c.spent)}</span>${c.li.on?`<span class="tag">Loyalitas ${c.li.prog}/${c.li.N}</span>`:''}</div></div>`).join('')||'<div class="card mut">Tidak ada pelanggan yang cocok.</div>';
+}
+const typeSel=(id,v)=>`<select id="${id}"><option value="free" ${v==='free'?'selected':''}>Gratis cuci</option><option value="discount" ${v==='discount'?'selected':''}>Diskon (%)</option><option value="other" ${v==='other'?'selected':''}>Hadiah lain (bonus/suvenir)</option></select>`;
+function tCust(){
+  const L=loyCfg(),C=cbCfg(),ina=+S.cfg.inactiveDays||30,rows=custRows();
+  const chip=(v,t)=>`<button class="sm ${S.custF===v?'':'ghost'}" data-a="custF" data-v="${v}">${t}</button>`;
+  return `<h2 style="margin:12px 0 0">Pelanggan</h2>
+  <div class="grid2" style="margin-top:8px"><div class="stat">Total pelanggan<b>${rows.length}</b></div><div class="stat">Lama tidak datang<b>${rows.filter(c=>c.inactive).length}</b></div></div>
+  ${isAdmin()?`<div class="card"><h2>Hadiah & Loyalitas</h2>
+  <div style="font-weight:700">🎁 Hadiah pelanggan loyal</div>
+  <label style="display:flex;gap:8px;align-items:center;color:var(--tx);font-size:15px"><input type="checkbox" id="loyOn" ${L.on?'checked':''}> Aktif</label>
+  <div class="grid2"><div><label>Tiap … cuci berbayar</label><input id="loyEvery" type="number" min="2" value="${L.every}"></div><div><label>Jenis hadiah</label>${typeSel('loyType',L.type)}</div></div>
+  <label>Keterangan hadiah (bisa diedit)</label><input id="loyText" value="${esc(L.text)}" placeholder="Contoh: Gratis cuci 1x / Diskon 20% / Gratis parfum">
+  <div class="grid2"><div><label>Diskon (%) bila jenis diskon</label><input id="loyPct" type="number" min="0" max="100" value="${L.pct}"></div><div><label>Maks harga layanan (0 = bebas)</label><input id="loyMax" type="number" min="0" value="${L.max}"></div></div>
+  <div style="font-weight:700;margin-top:16px">💤 Hadiah pelanggan lama tidak datang</div>
+  <label style="display:flex;gap:8px;align-items:center;color:var(--tx);font-size:15px"><input type="checkbox" id="cbOn" ${C.on?'checked':''}> Aktif</label>
+  <div class="grid2"><div><label>Dianggap lama setelah (hari)</label><input id="inaDays" type="number" min="1" value="${ina}"></div><div><label>Jenis hadiah</label>${typeSel('cbType',C.type)}</div></div>
+  <label>Keterangan hadiah (bisa diedit)</label><input id="cbText" value="${esc(C.text)}" placeholder="Contoh: Diskon 20% kunjungan berikutnya">
+  <div class="grid2"><div><label>Diskon (%) bila jenis diskon</label><input id="cbPct" type="number" min="0" max="100" value="${C.pct}"></div><div><label>Maks harga layanan (0 = bebas)</label><input id="cbMax" type="number" min="0" value="${C.max}"></div></div>
+  <button class="block" data-a="loySave">Simpan</button><div class="tag" style="margin-top:6px">Cuci member tidak dihitung. Hadiah dipakai lewat tombol di form pekerjaan. Jenis "Hadiah lain" tidak mengubah harga, hanya pengingat untuk staf.</div></div>
+  <div class="card"><h2>Data Contoh</h2><div class="mut">Isi 6 pelanggan contoh (loyal dan lama tidak datang) untuk melihat tampilan. Tidak ikut dihitung di omzet dan komisi, dan bisa dihapus sekali tekan.</div><div class="row" style="margin-top:8px"><button class="sm" data-a="demoOn">Isi data contoh</button><button class="sm bad" data-a="demoOff">Hapus data contoh</button></div></div>`:''}
+  <input id="custQ" placeholder="Cari plat atau nama..." value="${esc(S.custQ||'')}" style="margin-top:12px">
+  <div class="row" style="margin-top:8px">${chip('all','Semua')}${chip('inactive','💤 Lama tidak datang')}${chip('reward','🎁 Dapat hadiah')}</div>
+  <div id="custList">${custListHtml()}</div>`;
+}
+function sheetCust(){
+  const c=custOf(S.sheet.pl);if(!c)return'<div class="row sp"><b>Data tidak ditemukan</b><button class="ghost sm" data-a="sheetClose">Tutup</button></div>';
+  const days=daysSince(c.last),li=loyInfo(c),cb=cbCfg(),inactive=isInactive(c),brand=S.cfg.brand.name;
+  const rw=[];if(li.on&&li.avail>0)rw.push(li.text);if(cb.on)rw.push(cb.text);
+  const msg='Halo '+(c.name||'')+', kendaraan '+c.plate+' sudah '+days+' hari belum dicuci di '+brand+'. Yuk mampir lagi!'+(rw.length?' Ada hadiah untuk Anda: '+rw.join(' / ')+'.':'');
+  const hist=c.jobs.slice().sort((a,b)=>(b.doneDate||'').localeCompare(a.doneDate||'')).map(j=>`<div class="srow"><div class="row sp"><b>${fdate(j.doneDate)}</b><span class="price">${payLbl(j)} <button class="sm ghost" data-a="notaJob" data-id="${j.id}">🧾</button></span></div><div>${esc(svc(j.serviceId).name)}</div><div class="tag">Karyawan: ${esc(jst(j).map(i=>(stf(i)||{}).name||'?').join(', ')||'-')}</div>${(j.before&&j.before[0]||j.after&&j.after[0])?`<div class="ba"><div>${j.before&&j.before[0]?`<img src="${esc(j.before[0])}"><i>Before</i>`:''}</div><div>${j.after&&j.after[0]?`<img src="${esc(j.after[0])}"><i>After</i>`:''}</div></div>`:''}</div>`).join('')||'<div class="mut">Belum ada riwayat pekerjaan.</div>';
+  return `<div class="row sp"><h2 style="margin:0">${esc(c.plate)}</h2><button class="ghost sm" data-a="sheetClose">Tutup</button></div>
+  <div>${esc(c.name||'-')}</div>
+  <div class="row" style="margin-top:6px">${c.phone?`<a class="btn ghost sm" href="tel:${esc(c.phone)}">📞 Telepon</a>`:''}${c.phone&&inactive?`<a class="btn ok sm" target="_blank" href="${esc(waLink(c.phone,msg))}">💬 Ingatkan via WA</a>`:''}</div>
+  <div class="grid2" style="margin-top:10px"><div class="stat">Kedatangan<b>${c.visits}x</b></div><div class="stat">Total belanja<b>${rp(c.spent)}</b></div></div>
+  <div class="mut" style="margin-top:8px">${c.paid} berbayar · ${c.member} member · ${c.free} hadiah dipakai · terakhir ${c.last?fdate(c.last)+' ('+days+' hari lalu)':'-'}</div>
+  ${li.on?`<div class="note ${li.avail>0?'n-ok':'n-info'}">${li.avail>0?'🎁 Berhak: '+esc(li.text)+' ('+li.avail+'x)':'Loyalitas: '+li.prog+'/'+li.N+' cuci berbayar menuju hadiah'}</div>`:''}
+  ${inactive?`<div class="note n-warn">💤 Sudah ${days} hari tidak datang.${cb.on?' Hadiah kembali: '+esc(cb.text):''}</div>`:''}
+  <h2 style="margin-top:14px">Riwayat</h2>${hist}`;
+}
+
+/* ----- deteksi member dari plat ----- */
+function memberMsgs(plateRaw,serviceId,pub,src){
+  const pl=normPlate(plateRaw),out=[];if(pl.length<3)return out;
+  const mine=(src||S.members).filter(m=>normPlate(m.plate)===pl),td=today();
+  if(!mine.length){if(!pub)out.push({t:'info',m:'Plat '+pl+' belum terdaftar sebagai member.'});return out}
+  mine.forEach(m=>{
+    const nm=esc(m.pkgName);
+    if(m.serviceId!==serviceId){out.push({t:'info',m:'Plat '+pl+' terdaftar member untuk layanan '+esc(svc(m.serviceId).name)+', tidak berlaku untuk layanan ini.'});return}
+    if(m.visitsLeft<=0){out.push({t:'warn',m:'⚠️ Member “'+nm+'” sisa kunjungan sudah habis. Tawarkan perpanjangan paket.'});return}
+    if(m.expires<td){out.push({t:'warn',m:'⚠️ Member “'+nm+'” kadaluarsa sejak '+fdate(m.expires)+' (sisa '+m.visitsLeft+'x tidak bisa dipakai). Tawarkan perpanjangan.'});return}
+    out.push({t:'ok',m:'✅ Member terdeteksi'+(pub?'':': '+esc(m.name)+' · '+nm)+' · sisa '+m.visitsLeft+'x · berlaku s/d '+fdate(m.expires)});
+    if(m.visitsLeft===1)out.push({t:'warn',m:'⚠️ Ini kunjungan terakhir member. Tawarkan perpanjangan paket.'});
+    const dl=Math.round((new Date(m.expires+'T00:00:00')-new Date(td+'T00:00:00'))/864e5);
+    if(dl<=7)out.push({t:'warn',m:'⚠️ Masa berlaku member '+(dl===0?'berakhir hari ini':'tinggal '+dl+' hari')+'.'});
+  });
+  return out;
+}
+const notesHtml=a=>a.map(x=>`<div class="note n-${x.t}">${x.m}</div>`).join('');
+function autoMember(d){
+  if(d.status==='selesai')return;
+  const pl=normPlate(d.plate),key=pl+'|'+d.serviceId,prev=d._ak;
+  if(prev===key)return;d._ak=key;
+  if(prev&&(d.reward||d.loyaltyFree))clearReward(d);
+  if(!prev&&d.status==='proses')return;
+  const cur=d.memberId&&S.members.find(m=>m.id===d.memberId);
+  if(prev&&cur&&normPlate(cur.plate)!==pl){d.memberId='';d.price=svc(d.serviceId).price}
+  if(!d.memberId&&pl.length>=3){
+    const td=today(),v=S.members.find(m=>normPlate(m.plate)===pl&&m.serviceId===d.serviceId&&m.visitsLeft>0&&m.expires>=td);
+    if(v){d.memberId=v.id;d.price=0;d.loyaltyFree=false;d.reward=null}
+  }
+}
+function memBoxHtml(d){
+  const pl=normPlate(d.plate),td=today();
+  const mems=S.members.filter(m=>(m.serviceId===d.serviceId&&m.visitsLeft>0&&m.expires>=td)||m.id===d.memberId).sort((a,b)=>(normPlate(b.plate)===pl)-(normPlate(a.plate)===pl));
+  return `<label>Pakai membership?</label><select data-j="memberId" data-re="1"><option value="">Tidak (bayar tunai)</option>${mems.map(m=>`<option value="${m.id}" ${m.id===d.memberId?'selected':''}>${esc(m.name)} · ${esc(m.plate)} · sisa ${m.visitsLeft}x</option>`).join('')}</select>`+notesHtml(memberMsgs(d.plate,d.serviceId,false))+loyHtml(d);
+}
+function refreshMem(){const d=S.sheet.d,b=$('#memBox');if(b)b.innerHTML=memBoxHtml(d);const pr=$('#priceIn');if(pr){pr.value=d.price;pr.disabled=!!(d.memberId||d.loyaltyFree)}}
+let bkT=0;
+function bkNote(){const f=$('#bkForm'),el=$('#bkNote');if(!f||!el)return;
+  if(MODE==='api'&&!S.tok){
+    clearTimeout(bkT);const pl=normPlate(f.plate.value),sid=f.serviceId.value;
+    if(pl.length<3){el.innerHTML='';return}
+    bkT=setTimeout(async()=>{try{const r=await api('memberStatus',{plate:pl});const e2=$('#bkNote');if(e2&&$('#bkForm'))e2.innerHTML=notesHtml(memberMsgs(pl,sid,true,r.members.map(m=>Object.assign({plate:pl},m))))}catch(err){}},500);
+    return}
+  el.innerHTML=notesHtml(memberMsgs(f.plate.value,f.serviceId.value,true))}
+
+/* ---------- sheet ---------- */
+function renderSheet(){const sh=$('#sheet');if(!S.sheet){sh.classList.remove('on');return}
+  $('#sheetIn').innerHTML=S.sheet.type==='job'?sheetJob():S.sheet.type==='cust'?sheetCust():S.sheet.type==='nota'?sheetNota():S.sheet.type==='exp'?sheetExp():S.sheet.type==='rep'?sheetRep():sheetMem();sh.classList.add('on')}
+function closeSheet(){S.sheet=null;$('#sheet').classList.remove('on');render()}
+
+/* ---------- actions ---------- */
+function setPath(o,path,v){const p=path.split('.');let r=o;for(let i=0;i<p.length-1;i++)r=r[p[i]];r[p[p.length-1]]=v}
+async function finishJob(d){
+  const s=svc(d.serviceId);
+  if(d.memberId&&!d.deducted){const m=S.members.find(x=>x.id===d.memberId);if(!m||m.visitsLeft<=0){toast('Sisa kunjungan member habis');return false}
+    m.visitsLeft--;await put('members',m);d.deducted=true;d.price=0}
+  const rate=(s.rate===''||s.rate==null)?S.cfg.commissionRate:+s.rate;
+  d.base=+s.price;d.commission=Math.round(d.base*rate/100);d.status='selesai';d.doneDate=today();d.doneAt=new Date().toISOString();if(!d.notaNo)d.notaNo=nextNota('NT',d.doneDate);return true;
+}
+const A={
+ goLogin(){S.screen='login';render()},goPublic(){S.screen='public';S.pub='home';render()},
+ pub(b){S.pub=b.v;render();scrollTo(0,0)},
+ async pkgSave(b){const i=+b.i,pk=S.draft.packages[i];
+   if(!String(pk.name||'').trim()){toast('Nama paket belum diisi');return}
+   const prev=clone(S.cfg.packages),o=clone(pk),j=S.cfg.packages.findIndex(x=>x.id===o.id);
+   if(j>=0)S.cfg.packages[j]=o;else S.cfg.packages.push(o);
+   if(await saveCfg()){toast('Paket "'+o.name+'" tersimpan');render()}else S.cfg.packages=prev},
+ async pkgDel(b){const i=+b.i,pk=S.draft.packages[i];if(!confirm('Hapus paket "'+pk.name+'"?'))return;
+   const prev=clone(S.cfg.packages);S.draft.packages.splice(i,1);
+   if(S.cfg.packages.some(x=>x.id===pk.id)){S.cfg.packages=S.cfg.packages.filter(x=>x.id!==pk.id);if(!(await saveCfg())){S.cfg.packages=prev;S.draft.packages.splice(i,0,pk)}}
+   render()},
+ notaJob(b){S.sheet={type:'nota',kind:'job',id:b.id};renderSheet()},
+ notaMem(b){S.sheet={type:'nota',kind:'mem',id:b.id};renderSheet()},
+ paper(b){S.paper=+b.v;renderSheet()},
+ notaCopyT(){const n=notaData();if(n)copyText(notaThermal(n,S.paper||32))},
+ repCopyT(){copyText(repThermal(finData(),S.paper||32))},
+ notaCopy(){const n=notaData();if(n)copyText(notaText(n))},
+ doPrint(){try{window.print()}catch(e){toast('Cetak tidak tersedia di sini. Gunakan Kirim WA atau Salin.')}},
+ repOpen(){S.sheet={type:'rep'};renderSheet()},
+ repCopy(){copyText(repText(finData()))},
+ finR(b){S.finRange=b.v;render()},
+ expNew(){S.sheet={type:'exp',d:{_new:1,id:uid(),date:today(),cat:EXP_CATS[0],desc:'',amount:0,createdAt:new Date().toISOString()}};renderSheet()},
+ expOpen(b){S.sheet={type:'exp',d:clone(S.expenses.find(x=>x.id===b.id))};renderSheet()},
+ async expSave(){const d=S.sheet.d;if(!(+d.amount>0)){toast('Isi jumlah pengeluaran');return}if(!d.date){toast('Isi tanggal');return}
+   const o=clone(d);delete o._new;o.amount=+o.amount;if(await put('expenses',o)){toast('Pengeluaran tersimpan');closeSheet()}},
+ async expDel(){if(!confirm('Hapus pengeluaran ini?'))return;await del('expenses',S.sheet.d.id);closeSheet()},
+ priceTab(b){S.priceTab=b.v;S.priceOpen='';render()},
+ priceOpen(b){S.priceOpen=S.priceOpen===b.id?'':b.id;render()},
+ memView(b){S.memView=b.v;S.draft=null;render()},
+ veh(b){S.vehicle=b.v;render()},newBooking(){S.lastBooking=null;render()},
+ logout(){S.sess=null;S.tok='';S.draft=null;try{localStorage.removeItem('bcw_sess');localStorage.removeItem('bcw_tok')}catch(e){}S.screen='public';S.pub='home';if(MODE==='api'){S.jobs=[];S.bookings=[];S.members=[];S.expenses=[];lastSync=0;loadPublic()}render()},
+ tab(b){S.tab=b.t;S.draft=null;render();scrollTo(0,0)},
+ async bkSt(b){const x=S.bookings.find(y=>y.id===b.id);x.status=b.s;await put('bookings',x);render()},
+ async bkDel(b){if(!confirm('Hapus booking ini?'))return;await del('bookings',b.id);render()},
+ bkJob(b){const x=S.bookings.find(y=>y.id===b.id);const ex=S.jobs.find(j=>j.bookingId===x.id);if(ex){toast('Booking ini sudah punya pekerjaan');A.jobOpen({id:ex.id});return}
+  S.sheet={type:'job',d:newJobDraft(x)};renderSheet()},
+ jobNew(){S.sheet={type:'job',d:newJobDraft(null)};renderSheet()},
+ jobOpen(b){const d=clone(S.jobs.find(j=>j.id===b.id));d.staffIds=jst(d).slice();S.sheet={type:'job',d};renderSheet()},
+ sheetClose(){closeSheet()},
+ async jobSave(){const d=S.sheet.d;if(!isAdmin()&&!(d.staffIds||[]).includes(me().id))d.staffIds=(d.staffIds||[]).concat(me().id);if(!(d.staffIds||[]).length){toast('Pilih minimal 1 karyawan');return}d.staffId=d.staffIds[0];if(!d.plate||!d.customer){toast('Isi nama dan plat');return}const o=clone(d);delete o._new;
+   if(d._new&&d.bookingId){const bk=S.bookings.find(x=>x.id===d.bookingId);if(bk){bk.status='proses';await put('bookings',bk)}}
+   if(await put('jobs',o)){toast('Tersimpan');closeSheet()}},
+ async jobStart(){const d=S.sheet.d;if(d._new&&dupActive(d)&&!confirm('Plat '+normPlate(d.plate)+' sudah ada di antrian/pekerjaan aktif. Tetap buat pekerjaan baru?'))return;
+   if(!isAdmin()&&!(d.staffIds||[]).includes(me().id))d.staffIds=(d.staffIds||[]).concat(me().id);
+   if(!d.plate||!d.customer){toast('Isi nama dan plat');return}
+   if(!(d.staffIds||[]).length){toast('Pilih minimal 1 karyawan yang tersedia');return}
+   const bz=busyIds(d.id);if(d.staffIds.some(i=>bz.has(i))){toast('Ada karyawan yang masih mengerjakan pekerjaan lain');return}
+   d.staffId=d.staffIds[0];d.status='proses';d.startedAt=new Date().toISOString();
+   const o=clone(d),nw=o._new;delete o._new;
+   if(nw&&o.bookingId){const bk=S.bookings.find(x=>x.id===o.bookingId);if(bk){bk.status='proses';await put('bookings',bk)}}
+   if(await put('jobs',o)){toast('Pekerjaan dimulai');closeSheet()}},
+ async jobQueue(){const d=S.sheet.d;if(d._new&&dupActive(d)&&!confirm('Plat '+normPlate(d.plate)+' sudah ada di antrian/pekerjaan aktif. Tetap buat pekerjaan baru?'))return;if(!d.plate||!d.customer){toast('Isi nama dan plat');return}
+   d.staffIds=[];d.staffId='';d.status='antri';const o=clone(d),nw=o._new;delete o._new;
+   if(nw&&o.bookingId){const bk=S.bookings.find(x=>x.id===o.bookingId);if(bk){bk.status='proses';await put('bookings',bk)}}
+   if(await put('jobs',o)){toast('Masuk antrian');closeSheet()}},
+ async jobDone(){const d=S.sheet.d;if(!isAdmin()&&!(d.staffIds||[]).includes(me().id))d.staffIds=(d.staffIds||[]).concat(me().id);if(!(d.staffIds||[]).length){toast('Pilih minimal 1 karyawan');return}d.staffId=d.staffIds[0];if(!d.plate||!d.customer){toast('Isi nama dan plat');return}
+   if(!(await finishJob(d)))return;const o=clone(d);delete o._new;
+   if(d.bookingId){const bk=S.bookings.find(x=>x.id===d.bookingId);if(bk){bk.status='selesai';await put('bookings',bk)}}
+   if(await put('jobs',o)){toast('Selesai. Komisi '+rp(o.commission));S.sheet={type:'nota',kind:'job',id:o.id};render()}},
+ async jobDel(){if(!confirm('Hapus pekerjaan?'))return;await del('jobs',S.sheet.d.id);closeSheet()},
+ phDel(b){S.sheet.d[b.side].splice(+b.i,1);renderSheet()},
+ memNew(){S.sheet={type:'mem',d:{pkgId:(S.cfg.packages[0]||{}).id,name:'',phone:'',plate:'',payMethod:'Tunai'}};renderSheet()},
+ async memSave(){const d=S.sheet.d,p=S.cfg.packages.find(x=>x.id===d.pkgId);if(!p||!d.name||!d.plate){toast('Lengkapi data');return}
+   const dup=S.members.find(m=>normPlate(m.plate)===normPlate(d.plate)&&m.serviceId===p.serviceId&&m.visitsLeft>0&&m.expires>=today());
+   if(dup&&!confirm('Plat ini masih punya member aktif untuk layanan yang sama (sisa '+dup.visitsLeft+'x). Tetap daftarkan paket baru?'))return;
+   const m={id:uid(),name:d.name,phone:d.phone,plate:normPlate(d.plate),pkgId:p.id,pkgName:p.name,serviceId:p.serviceId,visitsLeft:+p.visits+(+p.bonus||0),visitsTotal:+p.visits+(+p.bonus||0),bonus:+p.bonus||0,expires:addDays(today(),+p.days),paid:+p.price,payMethod:d.payMethod||'Tunai',notaNo:nextNota('MB',today()),created:today(),createdAt:new Date().toISOString()};
+   if(await put('members',m)){toast('Member terdaftar');S.sheet={type:'nota',kind:'mem',id:m.id};render()}},
+ async memDel(b){if(!confirm('Hapus member?'))return;await del('members',b.id);render()},
+ async demoOn(){if(S.jobs.some(j=>j.demo)){toast('Data contoh sudah ada');return}
+   const {jobs,mem}=demoData();toast('Mengisi data contoh...');
+   if(!(await putMany('members',mem)))return;if(!(await putMany('jobs',jobs)))return;
+   toast('Data contoh terisi ('+jobs.length+' kunjungan)');render()},
+ async demoOff(){const jl=S.jobs.filter(j=>j.demo),ml=S.members.filter(m=>m.demo);
+   if(!jl.length&&!ml.length){toast('Tidak ada data contoh');return}
+   if(!confirm('Hapus semua data contoh?'))return;toast('Menghapus data contoh...');
+   await delMany('jobs',jl.map(j=>j.id));await delMany('members',ml.map(m=>m.id));
+   toast('Data contoh dihapus');render()},
+ loyUse(b){applyReward(S.sheet.d,b.k);renderSheet()},
+ loyCancel(){clearReward(S.sheet.d);renderSheet()},
+ custF(b){S.custF=b.v;render()},
+ custOpen(b){S.sheet={type:'cust',pl:b.pl};renderSheet()},
+ async loySave(){const g=id=>$('#'+id),pc=v=>Math.min(100,Math.max(0,+v||0));
+   S.cfg.loyalty={on:g('loyOn').checked,every:Math.max(2,+g('loyEvery').value||10),type:g('loyType').value,text:g('loyText').value.trim()||'Hadiah loyalitas',pct:pc(g('loyPct').value),maxPrice:Math.max(0,+g('loyMax').value||0)};
+   S.cfg.comeback={on:g('cbOn').checked,type:g('cbType').value,text:g('cbText').value.trim()||'Hadiah kembali',pct:pc(g('cbPct').value),maxPrice:Math.max(0,+g('cbMax').value||0)};
+   S.cfg.inactiveDays=Math.max(1,+g('inaDays').value||30);
+   if(await saveCfg()){toast('Pengaturan hadiah tersimpan');render()}},
+ async komRate(){const v=+$('#rateIn').value;if(!(v>=0&&v<=100)){toast('Isi angka 0-100');return}S.cfg.commissionRate=v;if(await saveCfg()){toast('Komisi default tersimpan');render()}},
+ async komPay(b){const L=S.jobs.filter(j=>j.status==='selesai'&&jst(j).includes(b.id)&&!paidFor(j,b.id)&&(j.doneDate||'').startsWith(S.month));
+   for(const j of L){j.paidBy=(j.paidBy||[]).concat(b.id);await put('jobs',j)}toast('Ditandai dibayar');render()},
+ setAdd(b){const k=b.k,d=S.draft;
+   if(k==='services')d.services.push({id:'s'+uid(),name:'Layanan baru',type:'mobil',price:0,duration:30,cat:'Lainnya',rate:'',desc:''});
+   if(k==='packages')d.packages.push({id:'p'+uid(),name:'Paket baru',serviceId:(d.services[0]||{}).id,visits:4,bonus:0,price:0,days:30});
+   if(k==='staff')d.staff.push({id:'u'+uid(),name:'Karyawan baru',username:'user'+d.staff.length,pin:'1111',role:'staff',active:true});
+   render()},
+ setDel(b){if(!confirm('Hapus item ini?'))return;S.draft[b.k].splice(+b.i,1);render()},
+ logoDel(){S.draft.brand.logo='';render()},
+ async setSave(){const d=S.draft;
+   if(!d.staff.some(u=>u.role==='admin'&&u.active)){toast('Minimal satu admin aktif');return}
+   const names=d.staff.map(u=>u.username.trim().toLowerCase());if(new Set(names).size!==names.length||names.some(n=>!n)){toast('Username harus unik dan terisi');return}
+   S.cfg=clone(d);if(await saveCfg()){S.draft=null;toast('Pengaturan tersimpan');render()}}
+};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b)return;if(b.tagName==='LABEL')return;const f=A[b.dataset.a];if(f){e.stopPropagation();if(S.lock)return;const r=f(b.dataset);if(r&&r.then){S.lock=true;r.finally(()=>{S.lock=false})}}});
+
+/* inputs */
+document.addEventListener('input',e=>{const t=e.target;
+  if(t.dataset.plate){const v=normPlate(t.value);if(t.value!==v)t.value=v;bkNote();return}
+  if(t.id==='custQ'){S.custQ=t.value;const l=$('#custList');if(l)l.innerHTML=custListHtml();return}
+  if(t.dataset.p&&S.draft){let v=t.type==='checkbox'?t.checked:t.dataset.n?(t.value===''?'':+t.value):t.value;setPath(S.draft,t.dataset.p,v);pkgTouch(t.dataset.p)}
+  else if(t.dataset.j&&S.sheet&&!t.dataset.re){let v=t.dataset.n?+t.value:t.value;if(t.dataset.j==='plate'){v=normPlate(v);if(t.value!==v)t.value=v}S.sheet.d[t.dataset.j]=v;if(t.dataset.j==='plate'&&S.sheet.type==='job'){autoMember(S.sheet.d);refreshMem()}}
+  else if(t.id==='monthSel'){S.month=t.value||S.month;render()}
+});
+document.addEventListener('change',async e=>{const t=e.target;
+  if(t.id==='jobFilter'){S.jobStaff=t.value;render();return}
+  if(t.id==='finFrom'||t.id==='finTo'){S[t.id]=t.value;render();return}
+  if(t.name==='serviceId'&&t.closest('#bkForm')){bkNote();return}
+  if(t.name==='date'&&t.closest('#bkForm')){const sel=$('#bkTime'),cur=sel.value;sel.innerHTML=timeOptions(t.value);if(!timePassed(t.value,cur))sel.value=cur;const nt=$('#bkTimeNote');if(nt)nt.textContent=slotsLeft(t.value)?'':'Tidak ada jam tersisa pada tanggal ini, pilih tanggal lain.';return}
+  if(t.dataset.sj&&S.sheet){const d=S.sheet.d;d.staffIds=d.staffIds||[];const i=d.staffIds.indexOf(t.dataset.sj);if(t.checked&&i<0)d.staffIds.push(t.dataset.sj);if(!t.checked&&i>=0)d.staffIds.splice(i,1);return}
+  if(t.dataset.p&&S.draft&&t.tagName==='SELECT'){setPath(S.draft,t.dataset.p,t.value);pkgTouch(t.dataset.p);if(t.dataset.p.startsWith('staff'))return}
+  if(t.dataset.j&&t.dataset.re&&S.sheet){const d=S.sheet.d;d[t.dataset.j]=t.value;
+    if(t.dataset.j==='serviceId'){d.memberId='';d.reward=null;d.loyaltyFree=false;d.price=svc(d.serviceId).price;autoMember(d)}
+    if(t.dataset.j==='memberId'){d.reward=null;d.loyaltyFree=false;d.price=t.value?0:svc(d.serviceId).price}
+    renderSheet()}
+  else if(t.dataset.j&&S.sheet&&t.tagName==='SELECT')S.sheet.d[t.dataset.j]=t.value;
+  if(t.dataset.ph&&t.files[0]){try{if(MODE==='api')toast('Mengunggah foto...');const u=await saveImg(await shrink(t.files[0],MODE==='api'?900:560,MODE==='api'?.7:.55));const d=S.sheet.d;(d[t.dataset.ph]=d[t.dataset.ph]||[]).push(u);renderSheet()}catch(err){toast(err.message||'Foto gagal diunggah')}}
+  if(t.id==='logoF'&&t.files[0]){try{S.draft.brand.logo=await saveImg(await shrink(t.files[0],256,.9,'image/png'));render()}catch(err){toast(err.message||'Logo gagal diunggah')}}
+});
+
+/* forms */
+document.addEventListener('submit',async e=>{e.preventDefault();const f=e.target;
+  if(f.id==='loginForm'){const u=f.u.value.trim().toLowerCase(),p=f.p.value.trim();
+    if(MODE==='api'){
+      if(S.lock)return;S.lock=true;toast('Masuk...');
+      try{const r=await api('login',{u,p});S.tok=r.token;try{localStorage.setItem('bcw_tok',r.token)}catch(err){}
+        S.sess=r.user.id;await syncNow(true);S.screen='app';S.tab=r.user.role==='admin'?'dash':'book';render()}
+      catch(err){toast(err.message||'Username atau PIN salah')}
+      S.lock=false;return}
+    const s=S.cfg.staff.find(x=>x.active&&x.username.toLowerCase()===u&&String(x.pin)===p);
+    if(!s){toast('Username atau PIN salah');return}
+    S.sess=s.id;try{localStorage.setItem('bcw_sess',s.id)}catch(err){}S.screen='app';S.tab=s.role==='admin'?'dash':'book';render()}
+  if(f.id==='bkForm'){if(S.lock)return;S.lock=true;const fd=Object.fromEntries(new FormData(f));
+    if(!fd.time||timePassed(fd.date,fd.time)){toast('Jam yang dipilih sudah lewat. Pilih jam berikutnya.');const sel=$('#bkTime');if(sel)sel.innerHTML=timeOptions(fd.date);S.lock=false;return}
+    const b={id:uid(),code:'BK'+Math.random().toString(36).slice(2,6).toUpperCase(),name:fd.name.trim(),phone:fd.phone.trim(),vehicle:S.vehicle,plate:normPlate(fd.plate),serviceId:fd.serviceId,date:fd.date,time:fd.time,note:fd.note.trim(),status:'baru',createdAt:new Date().toISOString()};
+    const dupB=S.bookings.find(x=>x.status!=='batal'&&x.date===b.date&&x.time===b.time&&normPlate(x.plate)===b.plate&&x.serviceId===b.serviceId);
+    if(dupB){toast('Booking yang sama sudah ada ('+dupB.code+')');S.lock=false;return}
+    const ok=await put('bookings',b);S.lock=false;if(ok){S.lastBooking=b;render();scrollTo(0,0)}}
+});
+boot();
+setInterval(()=>{const f=$('#bkForm'),sel=$('#bkTime');if(!f||!sel)return;const cur=sel.value;sel.innerHTML=timeOptions(f.date.value);if(!timePassed(f.date.value,cur))sel.value=cur},60000);
+</script>
+</body>
+</html>
